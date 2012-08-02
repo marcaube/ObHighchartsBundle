@@ -1,11 +1,47 @@
 # ObHighchartsBundle - A simple chart bundle using HighRoller, a PHP wrapper for Highcharts.js
 
-This bundle aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application.
+`ObHighchartsBundle` aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application by
+providing Twig extensions to do the heavy lifting. The bundle uses the excellent JS library Highcharts and a PHP wrapper
+by the guys at [Gravity.com](http://gravity.com/)
 
 * Highcharts [Home Page](http://http://www.highcharts.com)
-* HighRoller [Home Page](http://highroller.io)
+* HighRoller [Home Page](http://highroller.io) [Gravity.com](http://gravity.com/)
 
 ## How to get started
+
+### Installation
+
+Add the following lines to your `deps` file:
+
+    [ObHighchartsBundle]
+        git=git://github.com/marcaube/ObHighchartsBundle.git
+        target=/bundles/Ob/HighchartsBundle
+
+Now, run the vendors script to download the bundle:
+
+    $ php bin/vendors install
+
+Then configure the Autoloader
+
+    <?php
+    ...
+    'Ob' => __DIR__.'/../vendor/bundles',
+
+And finally register the bundle in your `AppKernel.php`:
+
+    <?php
+    ...
+    public function registerBundles()
+    {
+        $bundles = array(
+            ...
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
+            ...
+        );
+    ...
+
+
+## Usage
 
 ### Basic Line Chart
 
