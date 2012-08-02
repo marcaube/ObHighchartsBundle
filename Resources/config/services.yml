@@ -1,0 +1,12 @@
+parameters:
+#    ob_highcharts.example.class: Ob\HighchartsBundle\Example
+
+services:
+  ob_highcharts.twig.highcharts_extension:
+#  twig.extension.chart:
+    class: Ob\HighchartsBundle\Twig\HighchartsExtension
+    tags:
+        - { name: twig.extension }
+#    ob_highcharts.example:
+#        class: %ob_highcharts.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
