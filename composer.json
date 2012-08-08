@@ -2,7 +2,7 @@
     "name": "ob/highcharts-bundle",
     "type": "symfony-bundle",
     "description": "Highcharts bundle",
-    "keywords": ["symfony2", "charting", "charts", "highcharts", "highroller"],
+    "keywords": ["symfony2", "charting", "charts", "highcharts"],
     "homepage": "https://github.com/marcaube/HighchartsBundle",
     "authors": [
         {
