@@ -1,11 +1,7 @@
 # ObHighchartsBundle
 
 `ObHighchartsBundle` aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application by
-providing Twig extensions to do the heavy lifting. The bundle uses the excellent JS library Highcharts and a PHP wrapper
-by the guys at [Gravity.com](http://gravity.com/)
-
-* [Highcharts' Home Page](http://http://www.highcharts.com)
-* [HighRoller's Home Page](http://highroller.io) / [Gravity.com](http://gravity.com/)
+providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library Highcharts.
 
 
 ## Quicknav
@@ -20,11 +16,8 @@ Because I grew tired of defining data series in php and then doing the exact sam
 javascript to display the graph. I needed something to do the heavy lifting for me and take care of the boilerplate 
 code.
 
-When I found HighRoller, the PHP wrapper, I just had to make a bundle I could reuse accross my projects. This project is
-in a ***really*** early stage as I don't know yet how I'm going to do things.
-
-I'd like to be able to define things in the controller, and change the way the graph/chart appears depending on the data.
-I'd also like to have template tags to do the same thing directly in the view.
+When I found HighRoller, a PHP wrapper for Highcharts, I just had to make a bundle I could reuse accross my projects. This project is
+in a ***really*** early stage as I don't know yet how this bundle is going to evolve.
 
 ## How to get started
 
@@ -73,26 +66,25 @@ In your controller ...
 
 ``` php
     <?php
-    use Ob\HighchartsBundle\HighRoller\HighRoller;
-    use Ob\HighchartsBundle\HighRoller\HighRollerSeriesData;
-    use Ob\HighchartsBundle\HighRoller\HighRollerLineChart;
+    use Ob\HighchartsBundle\Highcharts\HighChart;
 
     // ...
     public function chartAction()
     {
         // Chart
-        $series = new HighRollerSeriesData();
-        $series->addName('Data Serie Name')->addData(array(1,2,4,5,6,3,8));
+        $series = array(
+            array("name" => "Data Serie Name",    "data" => array(1,2,4,5,6,3,8))
+        );
 
-        $chart = new HighRollerLineChart();
-        $chart->chart->renderTo = 'linechart';  // The #id of the div where to render the chart
-        $chart->title->text = 'Chart Title';
-        $chart->xAxis->title->text = 'Horizontal axis title';
-        $chart->yAxis->title->text = 'Vertical axis title';
-        $chart->addSeries($series);
+        $ob = new HighChart();
+        $ob->chart->renderTo('linechart');  // The #id of the div where to render the chart
+        $ob->title->text('Chart Title');
+        $ob->xAxis->title(array('text'  => "Horizontal axis title"));
+        $ob->yAxis->title(array('text'  => "Vertical axis title"));
+        $ob->series($series);
 
         return $this->render('::your_template.html.twig', array(
-            'chart' => $chart
+            'chart' => $ob
         ));
     }
 ```
@@ -114,4 +106,4 @@ Voilà !
 ## Todo
 * Look how other chart-rendering bundles do and evaluate the best way to do things
 * Ease the conversion of a Collection of entities to an associative array Highcharts can use. Provide functions to do it.
-* Try not to ship with with HighRoller or Highcharts. This is impossible if there need to be changes to them though...
+* Try not to ship with with Highcharts.
