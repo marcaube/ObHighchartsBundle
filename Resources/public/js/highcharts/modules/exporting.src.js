@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v2.1.7 (2011-10-19)
+ * @license Highcharts JS v2.2.5 (2012-06-08)
  * Exporting module
  *
  * (c) 2010-2011 Torstein Hønsi
@@ -16,6 +16,7 @@
 var HC = Highcharts,
 	Chart = HC.Chart,
 	addEvent = HC.addEvent,
+	removeEvent = HC.removeEvent,
 	createElement = HC.createElement,
 	discardElement = HC.discardElement,
 	css = HC.css,
@@ -104,7 +105,6 @@ defaultOptions.exporting = {
 	type: 'image/png',
 	url: 'http://export.highcharts.com/',
 	width: 800,
-	enableImages: false,
 	buttons: {
 		exportButton: {
 			//enabled: true,
@@ -140,16 +140,21 @@ defaultOptions.exporting = {
 						type: 'image/svg+xml'
 					});
 				}
-			}/*, {
+			}
+			// Enable this block to add "View SVG" to the dropdown menu
+			/*
+			,{
+
 				text: 'View SVG',
-				onclick: function() {
+				onclick: function () {
 					var svg = this.getSVG()
 						.replace(/</g, '\n&lt;')
 						.replace(/>/g, '&gt;');
 
-					doc.body.innerHTML = '<pre>'+ svg +'</pre>';
+					doc.body.innerHTML = '<pre>' + svg + '</pre>';
 				}
-			}*/]
+			} // */
+			]
 
 		},
 		printButton: {
@@ -181,20 +186,13 @@ extend(Chart.prototype, {
 			sandbox,
 			svg,
 			seriesOptions,
-			config,
-			pointOptions,
-			pointMarker,
 			options = merge(chart.options, additionalOptions); // copy the options and add extra options
 
 		// IE compatibility hack for generating SVG content that it doesn't really understand
 		if (!doc.createElementNS) {
 			/*jslint unparam: true*//* allow unused parameter ns in function below */
 			doc.createElementNS = function (ns, tagName) {
-				var elem = doc.createElement(tagName);
-				elem.getBBox = function () {
-					return HC.Renderer.prototype.Element.prototype.getBBox.apply({ element: elem });
-				};
-				return elem;
+				return doc.createElement(tagName);
 			};
 			/*jslint unparam: false*/
 		}
@@ -213,56 +211,26 @@ extend(Chart.prototype, {
 			forExport: true
 		});
 		options.exporting.enabled = false; // hide buttons in print
-
-		if (!options.exporting.enableImages) {
-			options.chart.plotBackgroundImage = null; // the converter doesn't handle images
-		}
+		options.chart.plotBackgroundImage = null; // the converter doesn't handle images
 
 		// prepare for replicating the chart
 		options.series = [];
 		each(chart.series, function (serie) {
-			seriesOptions = serie.options;
+			seriesOptions = merge(serie.options, {
+				animation: false, // turn off animation
+				showCheckbox: false,
+				visible: serie.visible
+			});
 
-			seriesOptions.animation = false; // turn off animation
-			seriesOptions.showCheckbox = false;
-			seriesOptions.visible = serie.visible;
+			if (!seriesOptions.isInternal) { // used for the navigator series that has its own option set
 
-			if (!options.exporting.enableImages) {
 				// remove image markers
 				if (seriesOptions && seriesOptions.marker && /^url\(/.test(seriesOptions.marker.symbol)) {
 					seriesOptions.marker.symbol = 'circle';
 				}
+
+				options.series.push(seriesOptions);
 			}
-
-			seriesOptions.data = [];
-
-			each(serie.data, function (point) {
-
-				// extend the options by those values that can be expressed in a number or array config
-				config = point.config;
-				pointOptions = {
-					x: point.x,
-					y: point.y,
-					name: point.name
-				};
-
-				if (typeof config === 'object' && point.config && config.constructor !== Array) {
-					extend(pointOptions, config);
-				}
-
-				pointOptions.visible = point.visible;
-				seriesOptions.data.push(pointOptions); // copy fresh updated data
-
-				if (!options.exporting.enableImages) {
-					// remove image markers
-					pointMarker = point.config && point.config.marker;
-					if (pointMarker && /^url\(/.test(pointMarker.symbol)) {
-						delete pointMarker.symbol;
-					}
-				}
-			});
-
-			options.series.push(seriesOptions);
 		});
 
 		// generate the chart copy
@@ -300,7 +268,8 @@ extend(Chart.prototype, {
 			.replace(/url\([^#]+#/g, 'url(#')
 			.replace(/<svg /, '<svg xmlns:xlink="http://www.w3.org/1999/xlink" ')
 			.replace(/ href=/g, ' xlink:href=')
-			/*.replace(/preserveAspectRatio="none">/g, 'preserveAspectRatio="none"/>')*/
+			.replace(/\n/, ' ')
+			.replace(/<\/svg>.*?$/, '</svg>') // any HTML added to the container after the SVG (#894)
 			/* This fails in IE < 8
 			.replace(/([0-9]+)\.([0-9]+)/g, function(s1, s2, s3) { // round off to save weight
 				return s2 +'.'+ s3[0];
@@ -311,16 +280,14 @@ extend(Chart.prototype, {
 			.replace(/&shy;/g,  '\u00AD') // soft hyphen
 
 			// IE specific
+			.replace(/<IMG /g, '<image ')
+			.replace(/height=([^" ]+)/g, 'height="$1"')
+			.replace(/width=([^" ]+)/g, 'width="$1"')
+			.replace(/hc-svg-href="([^"]+)">/g, 'xlink:href="$1"/>')
 			.replace(/id=([^" >]+)/g, 'id="$1"')
 			.replace(/class=([^" ]+)/g, 'class="$1"')
 			.replace(/ transform /g, ' ')
 			.replace(/:(path|rect)/g, '$1')
-			.replace(/<img ([^>]*)>/gi, '<image $1 />')
-			.replace(/<\/image>/g, '') // remove closing tags for images as they'll never have any content
-			.replace(/<image ([^>]*)([^\/])>/gi, '<image $1$2 />') // closes image tags for firefox
-			.replace(/width=(\d+)/g, 'width="$1"')
-			.replace(/height=(\d+)/g, 'height="$1"')
-			.replace(/hc-svg-href="/g, 'xlink:href="')
 			.replace(/style="([^"]+)"/g, function (s) {
 				return s.toLowerCase();
 			});
@@ -343,7 +310,7 @@ extend(Chart.prototype, {
 	exportChart: function (options, chartOptions) {
 		var form,
 			chart = this,
-			svg = chart.getSVG(chartOptions);
+			svg = chart.getSVG(merge(chart.options.exporting.chartOptions, chartOptions)); // docs
 
 		// merge the options
 		options = merge(chart.options.exporting, options);
@@ -351,7 +318,8 @@ extend(Chart.prototype, {
 		// create the form
 		form = createElement('form', {
 			method: 'post',
-			action: options.url
+			action: options.url,
+			enctype: 'multipart/form-data'
 		}, {
 			display: NONE
 		}, doc.body);
@@ -499,8 +467,13 @@ extend(Chart.prototype, {
 						item.onclick.apply(chart, arguments);
 					};
 
+					// Keep references to menu divs to be able to destroy them
+					chart.exportDivElements.push(div);
 				}
 			});
+
+			// Keep references to menu and innerMenu div to be able to destroy them
+			chart.exportDivElements.push(innerMenu, menu);
 
 			chart.exportMenuWidth = menu.offsetWidth;
 			chart.exportMenuHeight = menu.offsetHeight;
@@ -533,9 +506,6 @@ extend(Chart.prototype, {
 			btnOptions = merge(chart.options.navigation.buttonOptions, options),
 			onclick = btnOptions.onclick,
 			menuItems = btnOptions.menuItems,
-			/*position = chart.getAlignment(btnOptions),
-			buttonLeft = position.x,
-			buttonTop = position.y,*/
 			buttonWidth = btnOptions.width,
 			buttonHeight = btnOptions.height,
 			box,
@@ -549,7 +519,14 @@ extend(Chart.prototype, {
 			symbolAttr = {
 				stroke: btnOptions.symbolStroke,
 				fill: btnOptions.symbolFill
-			};
+			},
+			symbolSize = btnOptions.symbolSize || 12;
+
+		// Keeps references to the button elements
+		if (!chart.exportDivElements) {
+			chart.exportDivElements = [];
+			chart.exportSVGElements = [];
+		}
 
 		if (btnOptions.enabled === false) {
 			return;
@@ -608,8 +585,6 @@ extend(Chart.prototype, {
 			.on('click', revert)
 			.add();
 
-		//addEvent(button.element, 'click', revert);
-
 		// add the click event
 		if (menuItems) {
 			onclick = function () {
@@ -628,9 +603,10 @@ extend(Chart.prototype, {
 		// the icon
 		symbol = renderer.symbol(
 				btnOptions.symbol,
-				btnOptions.symbolX,
-				btnOptions.symbolY,
-				(btnOptions.symbolSize || 12) / 2
+				btnOptions.symbolX - (symbolSize / 2),
+				btnOptions.symbolY - (symbolSize / 2),
+				symbolSize,				
+				symbolSize
 			)
 			.align(btnOptions, true)
 			.attr(extend(symbolAttr, {
@@ -638,58 +614,103 @@ extend(Chart.prototype, {
 				zIndex: 20
 			})).add();
 
+		// Keep references to the renderer element so to be able to destroy them later.
+		chart.exportSVGElements.push(box, button, symbol);
+	},
 
+	/**
+	 * Destroy the buttons.
+	 */
+	destroyExport: function () {
+		var i,
+			chart = this,
+			elem;
 
+		// Destroy the extra buttons added
+		for (i = 0; i < chart.exportSVGElements.length; i++) {
+			elem = chart.exportSVGElements[i];
+			// Destroy and null the svg/vml elements
+			elem.onclick = elem.ontouchstart = null;
+			chart.exportSVGElements[i] = elem.destroy();
+		}
+
+		// Destroy the divs for the menu
+		for (i = 0; i < chart.exportDivElements.length; i++) {
+			elem = chart.exportDivElements[i];
+
+			// Remove the event handler
+			removeEvent(elem, 'mouseleave');
+
+			// Remove inline events
+			chart.exportDivElements[i] = elem.onmouseout = elem.onmouseover = elem.ontouchstart = elem.onclick = null;
+
+			// Destroy the div by moving to garbage bin
+			discardElement(elem);
+		}
 	}
 });
 
+/**
+ * Crisp for 1px stroke width, which is default. In the future, consider a smarter,
+ * global function.
+ */
+function crisp(arr) {
+	var i = arr.length;
+	while (i--) {
+		if (typeof arr[i] === 'number') {
+			arr[i] = Math.round(arr[i]) - 0.5;		
+		}
+	}
+	return arr;
+}
+
 // Create the export icon
-HC.Renderer.prototype.symbols.exportIcon = function (x, y, radius) {
-	return [
+HC.Renderer.prototype.symbols.exportIcon = function (x, y, width, height) {
+	return crisp([
 		M, // the disk
-		x - radius, y + radius,
+		x, y + width,
 		L,
-		x + radius, y + radius,
-		x + radius, y + radius * 0.5,
-		x - radius, y + radius * 0.5,
+		x + width, y + height,
+		x + width, y + height * 0.8,
+		x, y + height * 0.8,
 		'Z',
 		M, // the arrow
-		x, y + radius * 0.5,
+		x + width * 0.5, y + height * 0.8,
 		L,
-		x - radius * 0.5, y - radius / 3,
-		x - radius / 6, y - radius / 3,
-		x - radius / 6, y - radius,
-		x + radius / 6, y - radius,
-		x + radius / 6, y - radius / 3,
-		x + radius * 0.5, y - radius / 3,
+		x + width * 0.8, y + height * 0.4,
+		x + width * 0.4, y + height * 0.4,
+		x + width * 0.4, y,
+		x + width * 0.6, y,
+		x + width * 0.6, y + height * 0.4,
+		x + width * 0.2, y + height * 0.4,
 		'Z'
-	];
+	]);
 };
 // Create the print icon
-HC.Renderer.prototype.symbols.printIcon = function (x, y, radius) {
-	return [
+HC.Renderer.prototype.symbols.printIcon = function (x, y, width, height) {
+	return crisp([
 		M, // the printer
-		x - radius, y + radius * 0.5,
+		x, y + height * 0.7,
 		L,
-		x + radius, y + radius * 0.5,
-		x + radius, y - radius / 3,
-		x - radius, y - radius / 3,
+		x + width, y + height * 0.7,
+		x + width, y + height * 0.4,
+		x, y + height * 0.4,
 		'Z',
 		M, // the upper sheet
-		x - radius * 0.5, y - radius / 3,
+		x + width * 0.2, y + height * 0.4,
 		L,
-		x - radius * 0.5, y - radius,
-		x + radius * 0.5, y - radius,
-		x + radius * 0.5, y - radius / 3,
+		x + width * 0.2, y,
+		x + width * 0.8, y,
+		x + width * 0.8, y + height * 0.4,
 		'Z',
 		M, // the lower sheet
-		x - radius * 0.5, y + radius * 0.5,
+		x + width * 0.2, y + height * 0.7,
 		L,
-		x - radius * 0.75, y + radius,
-		x + radius * 0.75, y + radius,
-		x + radius * 0.5, y + radius * 0.5,
+		x, y + height,
+		x + width, y + height,
+		x + width * 0.8, y + height * 0.7,
 		'Z'
-	];
+	]);
 };
 
 
@@ -704,7 +725,11 @@ Chart.prototype.callbacks.push(function (chart) {
 		for (n in buttons) {
 			chart.addButton(buttons[n]);
 		}
+
+		// Destroy the export elements at chart destroy
+		addEvent(chart, 'destroy', chart.destroyExport);
 	}
+
 });
 
 
