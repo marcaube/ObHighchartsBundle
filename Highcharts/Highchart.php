@@ -98,6 +98,9 @@ class HighChart {
         // Legend
         // Loading
         // PlotOptions
+        if(get_object_vars($this->plotOptions->plotOptions)) {
+            $chartJS .= "        plotOptions: " . json_encode($this->plotOptions->plotOptions) . ",\n";
+        }
         // Point
 
         // Series
