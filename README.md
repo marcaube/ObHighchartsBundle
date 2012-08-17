@@ -66,7 +66,7 @@ In your controller ...
 
 ``` php
     <?php
-    use Ob\HighchartsBundle\Highcharts\HighChart;
+    use Ob\HighchartsBundle\Highcharts\Highchart;
 
     // ...
     public function chartAction()
@@ -76,7 +76,7 @@ In your controller ...
             array("name" => "Data Serie Name",    "data" => array(1,2,4,5,6,3,8))
         );
 
-        $ob = new HighChart();
+        $ob = new Highchart();
         $ob->chart->renderTo('linechart');  // The #id of the div where to render the chart
         $ob->title->text('Chart Title');
         $ob->xAxis->title(array('text'  => "Horizontal axis title"));
