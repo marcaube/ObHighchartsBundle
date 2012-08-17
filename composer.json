@@ -2,8 +2,8 @@
     "name": "ob/highcharts-bundle",
     "type": "symfony-bundle",
     "description": "Highcharts bundle",
-    "keywords": ["symfony2", "charting", "charts", "highcharts"],
-    "homepage": "https://github.com/marcaube/HighchartsBundle",
+    "keywords": ["symfony2", "charting", "charts", "highcharts", "chart", "graph", "graphs"],
+    "homepage": "https://github.com/marcaube/ObHighchartsBundle",
     "authors": [
         {
             "name": "Marc Aubé"
