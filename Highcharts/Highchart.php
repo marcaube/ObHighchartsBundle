@@ -9,7 +9,7 @@ namespace Ob\HighchartsBundle\Highcharts;
  * @author  Marc Aubé
  * @date    2012-08-07
  */
-class HighChart {
+class Highchart {
 
     // Default options
     public $chart;
