@@ -96,6 +96,9 @@ class Highchart {
         // Labels
         // Lang
         // Legend
+        if(get_object_vars($this->legend->legend)) {
+            $chartJS .= "        legend: " . json_encode($this->legend->legend) . ",\n";
+        }
         // Loading
         // PlotOptions
         if(get_object_vars($this->plotOptions->plotOptions)) {
