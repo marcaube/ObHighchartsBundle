@@ -32,7 +32,9 @@ class ChartOption {
 
     public function __get($name)
     {
-        $value = $this->chart->$name;
+        $option_name = $this->option_name;
+        $value = $this->{$option_name}->{$name};
+
         return $value;
     }
 }
