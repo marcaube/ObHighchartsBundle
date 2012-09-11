@@ -69,6 +69,7 @@ class Highchart {
     {
         $chartJS = "";
 
+        // jQuery or MooTools
         if($engine == 'mootools') {
             $chartJS = 'window.addEvent(\'domready\', function() {';
         } else {
@@ -93,17 +94,20 @@ class Highchart {
 
         // Global
         // Labels
-        // Labels
         // Lang
+
         // Legend
         if(get_object_vars($this->legend->legend)) {
             $chartJS .= "        legend: " . json_encode($this->legend->legend) . ",\n";
         }
+
         // Loading
+
         // PlotOptions
         if(get_object_vars($this->plotOptions->plotOptions)) {
             $chartJS .= "        plotOptions: " . json_encode($this->plotOptions->plotOptions) . ",\n";
         }
+
         // Point
 
         // Series
@@ -117,19 +121,27 @@ class Highchart {
         }
 
         // Symbols
+
         // Title
         if(get_object_vars($this->title->title)) {
             $chartJS .= "        title: " . json_encode($this->title->title) . ",\n";
         }
+
         // Tooltip
+        if(get_object_vars($this->tooltip->tooltip)) {
+            $chartJS .= "        tooltip: " . json_encode($this->tooltip->tooltip) . ",\n";
+        }
+
         // xAxis
         if(get_object_vars($this->xAxis->xAxis)) {
             $chartJS .= "        xAxis: " . json_encode($this->xAxis->xAxis) . ",\n";
         }
+
         // yAxis
         if(get_object_vars($this->yAxis->yAxis)) {
             $chartJS .= "        yAxis: " . json_encode($this->yAxis->yAxis) . ",\n";
         }
+
         // Exporting
         // Navigation
 
