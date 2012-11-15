@@ -92,6 +92,7 @@ class Highchart {
             $chartJS .= "        credits: " . json_encode($this->credits->credits) . ",\n";
         }
 
+        // Exporting
         // Global
         // Labels
         // Lang
@@ -102,13 +103,13 @@ class Highchart {
         }
 
         // Loading
+        // Navigation
+        // Pane
 
         // PlotOptions
         if(get_object_vars($this->plotOptions->plotOptions)) {
             $chartJS .= "        plotOptions: " . json_encode($this->plotOptions->plotOptions) . ",\n";
         }
-
-        // Point
 
         // Series
         if(!empty($this->series)) {
@@ -141,9 +142,6 @@ class Highchart {
         if(get_object_vars($this->yAxis->yAxis)) {
             $chartJS .= "        yAxis: " . json_encode($this->yAxis->yAxis) . ",\n";
         }
-
-        // Exporting
-        // Navigation
 
         $chartJS .= "    });\n  });\n";
 
