@@ -1,15 +1,18 @@
 # ObHighchartsBundle
 
 `ObHighchartsBundle` aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application by
-providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library Highcharts.
+providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library [Highcharts](http://www.highcharts.com).
 
 [![Build Status](https://secure.travis-ci.org/marcaube/ObHighchartsBundle.png?branch=master)](http://travis-ci.org/marcaube/ObHighchartsBundle)
 
-## Quicknav
-* [Why](#why-)
-* [How to get started](#how-to-get-started)
-* [Usage](#usage)
-* [List of things to do](#todo)
+## Content
+* The Why
+* How to get started / Installation
+* Usage
+    * Make a basic line-chart
+    * use js anonymous functions
+* Cookbook
+    * Pie chart with legend (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
 
 ## Why ?
 
@@ -17,14 +20,12 @@ Because I grew tired of defining data series in php and then doing the exact sam
 javascript to display the graph. I needed something to do the heavy lifting for me and take care of the boilerplate 
 code.
 
-When I found HighRoller, a PHP wrapper for Highcharts, I just had to make a bundle I could reuse accross my projects. This project is
-in a ***really*** early stage as I don't know yet how this bundle is going to evolve.
-
 ## How to get started
 
 ### Installation
 
-Add the following lines to your `deps` file:
+#### With the `deps` file: 
+Add the following lines :
 
     [ObHighchartsBundle]
         git=git://github.com/marcaube/ObHighchartsBundle.git
@@ -44,6 +45,10 @@ Then configure the Autoloader
     'Ob' => __DIR__.'/../vendor/bundles',
 ```
 
+#### With `composer` : 
+add `"ob/highcharts-bundle": "dev-master"` to your `composer.json` file
+
+#### Both
 And finally register the bundle in your `app/AppKernel.php`:
 
 ``` php
@@ -104,7 +109,43 @@ In your template ...
 
 Voilà !
 
-## Todo
-* Look how other chart-rendering bundles do and evaluate the best way to do things
-* Ease the conversion of a Collection of entities to an associative array Highcharts can use. Provide functions to do it.
-* Try not to ship with with Highcharts.
+### Use a Javascript anonymous function
+There are several use case where you need to define a js function, let's see how to use one for a tooltip formatter
+
+``` php
+// ...
+$func = new Zend\Json\Expr("function() {
+    return 'The value for <b>'+ this.x +
+    '</b> is <b>'+ this.y +'</b>';
+}");
+
+$ob = new Highchart();
+$ob->tooltip->formatter($func);
+// ...
+```
+
+## Cookbook
+
+### Pie chart with legend
+This is a simple recipe to re-create the pie-chart demo with legend at [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend)
+
+```php
+$ob = new Highchart();
+$ob->chart->renderTo('linechart');
+$ob->title->text('Browser market shares at a specific website in 2010');
+$ob->plotOptions->pie(array(
+    'allowPointSelect'  => true,
+    'cursor'    => 'pointer',
+    'dataLabels'    => array('enabled' => false),
+    'showInLegend'  => true
+));
+$data = array(
+    array('Firefox', 45.0),
+    array('IE', 26.8),
+    array('Chrome', 12.8),
+    array('Safari', 8.5),
+    array('Opera', 6.2),
+    array('Others', 0.7),
+);
+$ob->series(array(array('type' => 'pie','name' => 'Browser share', 'data' => $data)));
+```
