@@ -3,6 +3,8 @@
 namespace Ob\HighchartsBundle\Tests;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use Zend\Json\Expr;
+
 
 /**
  * This class hold Unit tests for the tooltip option
@@ -91,6 +93,19 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
 
         $chart->tooltip->enabled("false");
         $this->assertRegExp('/tooltip: \{"enabled":"false"\}/', $chart->render());
+    }
+
+    /**
+     * Formatter option (Zend Json Expr)
+     */
+    public function testFormatter()
+    {
+        $chart = new Highchart();
+
+        $func = new Expr('function() { return 1; }');
+
+        $chart->tooltip->formatter($func);
+        $this->assertRegExp('/tooltip: \{"formatter":function\(\) \{ return 1; \}\}/', $chart->render());
     }
 
     /**
