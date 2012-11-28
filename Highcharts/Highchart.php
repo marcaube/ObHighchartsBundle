@@ -159,12 +159,21 @@ class Highchart {
         }
 
         // yAxis
-        if(get_object_vars($this->yAxis->yAxis)) {
-            $chartJS .= "        yAxis: " .
-                Json::encode($this->yAxis->yAxis,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
-        }
+	if(gettype($this->yAxis) === 'array') {
+	  if(!empty($this->yAxis)) {
+	    $chartJS .= "        yAxis: " .
+	      Json::encode($this->yAxis[0],
+			   false,
+			   array('enableJsonExprFinder' => true)) . ",\n";
+	  }
+	} else if(gettype($this->yAxis) === 'object') {
+	  if(get_object_vars($this->yAxis->yAxis)) {
+	    $chartJS .= "        yAxis: " .
+	      Json::encode($this->yAxis->yAxis,
+			   false,
+			   array('enableJsonExprFinder' => true)) . ",\n";
+	  }
+	}
 
         $chartJS .= "    });\n  });\n";
 
