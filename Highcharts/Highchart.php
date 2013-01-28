@@ -37,8 +37,10 @@ class Highchart {
     public $navigation;
 
 
-    public function __construct()
+    public function __construct($container)
     {
+        $this->container = $container;
+
         $this->chart = new ChartOption('chart');
         $this->colors = array();
         $this->credits = new ChartOption('credits');
@@ -71,12 +73,25 @@ class Highchart {
     {
         $chartJS = "";
 
-        // jQuery or MooTools
         if($engine == 'mootools') {
-            $chartJS = 'window.addEvent(\'domready\', function() {';
+            $chartJS  = '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/adapters/mootools-adapter.js').'" type="text/javascript"></script>'."\r\n";
+        } elseif ($engine == 'prototype') {
+            $chartJS  = '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/adapters/prototype-adapter.js').'" type="text/javascript"></script>'."\r\n";
+        }
+
+        $chartJS .= '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/highcharts.js').'" type="text/javascript"></script>'."\r\n";
+        $chartJS .= '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/modules/exporting.js').'" type="text/javascript"></script>'."\r\n";
+        
+        // jQuery or MooTools
+        $chartJS .= '<script type="text/javascript">';
+        if($engine == 'mootools') {
+            $chartJS .= 'window.addEvent(\'domready\', function() {';
+        } elseif($engine == 'prototype') {
+            $chartJS .= 'document.observe(\'doc:ready\', function() {';
         } else {
             $chartJS = "$(function(){";
         }
+
         $chartJS .= "\n    var " . (isset($this->chart->renderTo)?$this->chart->renderTo:'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
@@ -176,6 +191,8 @@ class Highchart {
 	}
 
         $chartJS .= "    });\n  });\n";
+
+        $chartJS .= '</script>';
 
         return trim($chartJS);
     }
