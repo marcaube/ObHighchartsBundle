@@ -12,9 +12,9 @@ class HighchartsExtension extends \Twig_Extension
         );
     }
 
-    public function chart($chart)
+    public function chart($chart,$engine)
     {
-        return $chart->render();
+        return $chart->render($engine);
     }
 
     public function getName()
