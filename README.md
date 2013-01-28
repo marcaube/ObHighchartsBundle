@@ -10,7 +10,8 @@ providing Twig extensions and PHP objects to do the heavy lifting. The bundle us
 * How to get started / Installation
 * Usage
     * Make a basic line-chart
-    * use js anonymous functions
+    * Use mootools instead of jQuery
+    * Use js anonymous functions
 * Cookbook
     * Pie chart with legend (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
     * Make a Multi-axes plot (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
@@ -153,6 +154,13 @@ In your template ...
 ```
 
 Voilà !
+
+
+### Use with mootools
+If you'd like to use mootools instead of jquery to render your charts, just use the second argument of the twig extension like so 
+``` html
+{{ chart(chart, 'mootools') }}
+```
 
 ### Use a Javascript anonymous function
 There are several use case where you need to define a js function, let's see how to use one for a tooltip formatter
