@@ -144,22 +144,35 @@ In your controller ...
 In your template ...
 
 ``` html
-    <script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-    <script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
-    <script type="text/javascript">
-        {{ chart(chart) }}
-    </script>
+<!-- Load jQuery from Google's CDN if needed -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-    <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script type="text/javascript">
+    {{ chart(chart) }}
+</script>
+
+<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 ```
 
 Voilà !
 
 
-### Use with mootools
-If you'd like to use mootools instead of jquery to render your charts, just use the second argument of the twig extension like so 
+### Use highcharts with mootools
+If you'd like to use mootools instead of jquery to render your charts, just load the mootools adapter use the second argument of the twig extension like this 
 ``` html
-{{ chart(chart, 'mootools') }}
+<!-- Load MooTools from Google's CDN if needed and the highcharts adapter -->
+<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js" type="text/javascript"></script>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/adapters/mootools-adapter.js') }}" type="text/javascript"></script>
+
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script type="text/javascript">
+    {{ chart(chart, 'mootools') }}
+</script>
+
+<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 ```
 
 ### Use a Javascript anonymous function
