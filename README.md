@@ -127,7 +127,7 @@ In your controller ...
             array("name" => "Data Serie Name",    "data" => array(1,2,4,5,6,3,8))
         );
 
-        $ob = new Highchart();
+        $ob = new Highchart($this);
         $ob->chart->renderTo('linechart');  // The #id of the div where to render the chart
         $ob->title->text('Chart Title');
         $ob->xAxis->title(array('text'  => "Horizontal axis title"));
@@ -143,12 +143,7 @@ In your controller ...
 In your template ...
 
 ``` html
-    <script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-    <script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
-    <script type="text/javascript">
-        {{ chart(chart) }}
-    </script>
-
+    {{ chart(chart) }}
     <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 ```
 
@@ -164,7 +159,7 @@ $func = new Zend\Json\Expr("function() {
     '</b> is <b>'+ this.y +'</b>';
 }");
 
-$ob = new Highchart();
+$ob = new Highchart($this);
 $ob->tooltip->formatter($func);
 // ...
 ```
@@ -175,7 +170,7 @@ $ob->tooltip->formatter($func);
 This is a simple recipe to re-create the pie-chart demo with legend at [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend)
 
 ```php
-$ob = new Highchart();
+$ob = new Highchart($this);
 $ob->chart->renderTo('linechart');
 $ob->title->text('Browser market shares at a specific website in 2010');
 $ob->plotOptions->pie(array(
@@ -240,7 +235,7 @@ $yData = array(
 );
 $categories = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 
-$ob = new Highchart();
+$ob = new Highchart($this);
 $ob->chart->renderTo('container'); // The #id of the div where to render the chart
 $ob->chart->type('column');
 $ob->title->text('Average Monthly Weather Data for Tokyo');
