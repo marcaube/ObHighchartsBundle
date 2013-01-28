@@ -82,7 +82,7 @@ class Highchart {
         $chartJS .= '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/highcharts.js').'" type="text/javascript"></script>'."\r\n";
         $chartJS .= '<script src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/obhighcharts/js/highcharts/modules/exporting.js').'" type="text/javascript"></script>'."\r\n";
         
-        // jQuery or MooTools
+        // jQuery, MooTools or Prototype
         $chartJS .= '<script type="text/javascript">';
         if($engine == 'mootools') {
             $chartJS .= 'window.addEvent(\'domready\', function() {';
