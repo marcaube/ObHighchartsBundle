@@ -1,0 +1,334 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Obhighchartsbundle by marcaube</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/marcaube/ObHighchartsBundle">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/marcaube/ObHighchartsBundle/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/marcaube/ObHighchartsBundle/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Obhighchartsbundle</h1>
+          <p>Symfony2 Bundle that aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/marcaube">marcaube</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>ObHighchartsBundle</h1>
+
+<p><code>ObHighchartsBundle</code> aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application by
+providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library <a href="http://www.highcharts.com">Highcharts</a>.</p>
+
+<p><a href="http://travis-ci.org/marcaube/ObHighchartsBundle"><img src="https://secure.travis-ci.org/marcaube/ObHighchartsBundle.png?branch=master" alt="Build Status"></a></p>
+
+<h2>Content</h2>
+
+<ul>
+<li>The Why</li>
+<li>How to get started / Installation</li>
+<li>Usage
+
+<ul>
+<li>Make a basic line-chart</li>
+<li>Use mootools instead of jQuery</li>
+<li>Use js anonymous functions</li>
+</ul>
+</li>
+<li>Cookbook
+
+<ul>
+<li>Pie chart with legend (like <a href="http://www.highcharts.com/demo/pie-legend">highcharts.com/demo/pie-legend</a>)</li>
+<li>Make a Multi-axes plot (like <a href="http://www.highcharts.com/demo/combo-multi-axes">highcharts.com/demo/combo-multi-axes</a>)</li>
+</ul>
+</li>
+</ul><h2>Why ?</h2>
+
+<p>Because I grew tired of defining data series in php and then doing the exact same thing with a different syntax in 
+javascript to display the graph. I needed something to do the heavy lifting for me and take care of the boilerplate 
+code.</p>
+
+<h2>How to get started</h2>
+
+<h3>Installation</h3>
+
+<ol>
+<li>
+<p>Add <code>"ob/highcharts-bundle": "dev-master"</code> to your <code>composer.json</code> file</p>
+
+<p>This bundle depends on Zend's Json module, and because composer does not load repositories recursively, you may want
+to add this to your composer to load only the Json module (200k) instead of the complete Zend Framework (95M). 
+See <a href="http://getcomposer.org/doc/faqs/why-can%27t-composer-load-repositories-recursively.md">why can't composer load repositories recursively</a></p>
+
+<div class="highlight"><pre><span class="s2">"repositories"</span><span class="err">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"composer"</span><span class="p">,</span>
+        <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://packages.zendframework.com/"</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+<p>Your Symfony2 composer file would look like</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+   <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"symfony/framework-standard-edition"</span><span class="p">,</span>
+   <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"The \"Symfony Standard Edition\" distribution"</span><span class="p">,</span>
+   <span class="nt">"autoload"</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">"psr-0"</span><span class="p">:</span> <span class="p">{</span> <span class="nt">""</span><span class="p">:</span> <span class="s2">"src/"</span> <span class="p">}</span>
+   <span class="p">},</span>
+   <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">"php"</span><span class="p">:</span> <span class="s2">"&gt;=5.3.3"</span><span class="p">,</span>
+       <span class="nt">"symfony/symfony"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"doctrine/orm"</span><span class="p">:</span> <span class="s2">"&gt;=2.2.3,&lt;2.4-dev"</span><span class="p">,</span>
+       <span class="nt">"doctrine/doctrine-bundle"</span><span class="p">:</span> <span class="s2">"1.0.*"</span><span class="p">,</span>
+       <span class="nt">"twig/extensions"</span><span class="p">:</span> <span class="s2">"1.0.*"</span><span class="p">,</span>
+       <span class="nt">"symfony/assetic-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"symfony/swiftmailer-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"symfony/monolog-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"sensio/distribution-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"sensio/framework-extra-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"sensio/generator-bundle"</span><span class="p">:</span> <span class="s2">"2.1.*"</span><span class="p">,</span>
+       <span class="nt">"jms/security-extra-bundle"</span><span class="p">:</span> <span class="s2">"1.2.*"</span><span class="p">,</span>
+       <span class="nt">"jms/di-extra-bundle"</span><span class="p">:</span> <span class="s2">"1.1.*"</span><span class="p">,</span>
+       <span class="nt">"ob/highcharts-bundle"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+   <span class="p">},</span>
+   <span class="nt">"scripts"</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">"post-install-cmd"</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"</span>
+       <span class="p">],</span>
+       <span class="nt">"post-update-cmd"</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"</span><span class="p">,</span>
+           <span class="s2">"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"</span>
+       <span class="p">]</span>
+   <span class="p">},</span>
+   <span class="nt">"minimum-stability"</span><span class="p">:</span> <span class="s2">"dev"</span><span class="p">,</span>
+   <span class="nt">"extra"</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">"symfony-app-dir"</span><span class="p">:</span> <span class="s2">"app"</span><span class="p">,</span>
+       <span class="nt">"symfony-web-dir"</span><span class="p">:</span> <span class="s2">"web"</span>
+   <span class="p">},</span>
+   <span class="nt">"repositories"</span><span class="p">:[</span>
+       <span class="p">{</span>
+           <span class="nt">"type"</span><span class="p">:</span><span class="s2">"composer"</span><span class="p">,</span>
+           <span class="nt">"url"</span><span class="p">:</span><span class="s2">"http://packages.zendframework.com/"</span>
+       <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+<li><p>Run <code>php composer.phar install</code></p></li>
+<li>
+<p>Register the bundle in your <code>app/AppKernel.php</code>:</p>
+
+<div class="highlight"><pre>   <span class="o">&lt;?</span><span class="nx">php</span>
+   <span class="o">...</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span>
+   <span class="p">{</span>
+       <span class="nv">$bundles</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+           <span class="o">...</span>
+           <span class="k">new</span> <span class="nx">Ob\HighchartsBundle\ObHighchartsBundle</span><span class="p">(),</span>
+           <span class="o">...</span>
+       <span class="p">);</span>
+   <span class="o">...</span>
+</pre></div>
+</li>
+</ol><h2>Usage</h2>
+
+<h3>Basic Line Chart</h3>
+
+<p>In your controller ...</p>
+
+<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+    <span class="k">use</span> <span class="nx">Ob\HighchartsBundle\Highcharts\Highchart</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">chartAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Chart</span>
+        <span class="nv">$series</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span><span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"Data Serie Name"</span><span class="p">,</span>    <span class="s2">"data"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="p">);</span>
+
+        <span class="nv">$ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Highchart</span><span class="p">();</span>
+        <span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">chart</span><span class="o">-&gt;</span><span class="na">renderTo</span><span class="p">(</span><span class="s1">'linechart'</span><span class="p">);</span>  <span class="c1">// The #id of the div where to render the chart</span>
+        <span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">'Chart Title'</span><span class="p">);</span>
+        <span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">xAxis</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'text'</span>  <span class="o">=&gt;</span> <span class="s2">"Horizontal axis title"</span><span class="p">));</span>
+        <span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">yAxis</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'text'</span>  <span class="o">=&gt;</span> <span class="s2">"Vertical axis title"</span><span class="p">));</span>
+        <span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">series</span><span class="p">(</span><span class="nv">$series</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'::your_template.html.twig'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'chart'</span> <span class="o">=&gt;</span> <span class="nv">$ob</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p>In your template ...</p>
+
+<div class="highlight"><pre><span class="c">&lt;!-- Load jQuery from Google's CDN if needed --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="p">{{</span> <span class="nx">chart</span><span class="p">(</span><span class="nx">chart</span><span class="p">)</span> <span class="p">}}</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"linechart"</span> <span class="na">style=</span><span class="s">"min-width: 400px; height: 400px; margin: 0 auto"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+
+<p>Voilà !</p>
+
+<h3>Use highcharts with mootools</h3>
+
+<p>If you'd like to use mootools instead of jquery to render your charts, just load the mootools adapter use the second argument of the twig extension like this </p>
+
+<div class="highlight"><pre><span class="c">&lt;!-- Load MooTools from Google's CDN if needed and the highcharts adapter --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ asset('bundles/obhighcharts/js/highcharts/adapters/mootools-adapter.js') }}"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="p">{{</span> <span class="nx">chart</span><span class="p">(</span><span class="nx">chart</span><span class="p">,</span> <span class="s1">'mootools'</span><span class="p">)</span> <span class="p">}}</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"linechart"</span> <span class="na">style=</span><span class="s">"min-width: 400px; height: 400px; margin: 0 auto"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+
+<h3>Use a Javascript anonymous function</h3>
+
+<p>There are several use case where you need to define a js function, let's see how to use one for a tooltip formatter</p>
+
+<div class="highlight"><pre><span class="c1">// ...</span>
+<span class="nv">$func</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Zend\Json\Expr</span><span class="p">(</span><span class="s2">"function() {</span>
+<span class="s2">    return 'The value for &lt;b&gt;'+ this.x +</span>
+<span class="s2">    '&lt;/b&gt; is &lt;b&gt;'+ this.y +'&lt;/b&gt;';</span>
+<span class="s2">}"</span><span class="p">);</span>
+
+<span class="nv">$ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Highchart</span><span class="p">();</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">tooltip</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="p">(</span><span class="nv">$func</span><span class="p">);</span>
+<span class="c1">// ...</span>
+</pre></div>
+
+<h2>Cookbook</h2>
+
+<h3>Pie chart with legend</h3>
+
+<p>This is a simple recipe to re-create the pie-chart demo with legend at <a href="http://www.highcharts.com/demo/pie-legend">highcharts.com/demo/pie-legend</a></p>
+
+<div class="highlight"><pre><span class="nv">$ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Highchart</span><span class="p">();</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">chart</span><span class="o">-&gt;</span><span class="na">renderTo</span><span class="p">(</span><span class="s1">'linechart'</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">'Browser market shares at a specific website in 2010'</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">plotOptions</span><span class="o">-&gt;</span><span class="na">pie</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'allowPointSelect'</span>  <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">'cursor'</span>    <span class="o">=&gt;</span> <span class="s1">'pointer'</span><span class="p">,</span>
+    <span class="s1">'dataLabels'</span>    <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'enabled'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="s1">'showInLegend'</span>  <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'Firefox'</span><span class="p">,</span> <span class="mf">45.0</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'IE'</span><span class="p">,</span> <span class="mf">26.8</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'Chrome'</span><span class="p">,</span> <span class="mf">12.8</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'Safari'</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'Opera'</span><span class="p">,</span> <span class="mf">6.2</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">'Others'</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
+<span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">series</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'type'</span> <span class="o">=&gt;</span> <span class="s1">'pie'</span><span class="p">,</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Browser share'</span><span class="p">,</span> <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">)));</span>
+</pre></div>
+
+<h3>Multi-axes plot</h3>
+
+<p>This is a simple recipe for creating a plot with multiple y-axes, similar to <a href="http://www.highcharts.com/demo/combo-multi-axes">the highcharts demo</a></p>
+
+<div class="highlight"><pre><span class="nv">$series</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'name'</span>  <span class="o">=&gt;</span> <span class="s1">'Rainfall'</span><span class="p">,</span>
+        <span class="s1">'type'</span>  <span class="o">=&gt;</span> <span class="s1">'column'</span><span class="p">,</span>
+        <span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#4572A7'</span><span class="p">,</span>
+        <span class="s1">'yAxis'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'data'</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mf">49.9</span><span class="p">,</span> <span class="mf">71.5</span><span class="p">,</span> <span class="mf">106.4</span><span class="p">,</span> <span class="mf">129.2</span><span class="p">,</span> <span class="mf">144.0</span><span class="p">,</span> <span class="mf">176.0</span><span class="p">,</span> <span class="mf">135.6</span><span class="p">,</span> <span class="mf">148.5</span><span class="p">,</span> <span class="mf">216.4</span><span class="p">,</span> <span class="mf">194.1</span><span class="p">,</span> <span class="mf">95.6</span><span class="p">,</span> <span class="mf">54.4</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'name'</span>  <span class="o">=&gt;</span> <span class="s1">'Temperature'</span><span class="p">,</span>
+        <span class="s1">'type'</span>  <span class="o">=&gt;</span> <span class="s1">'spline'</span><span class="p">,</span>
+        <span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#AA4643'</span><span class="p">,</span>
+        <span class="s1">'data'</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mf">18.2</span><span class="p">,</span> <span class="mf">21.5</span><span class="p">,</span> <span class="mf">25.2</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">23.3</span><span class="p">,</span> <span class="mf">18.3</span><span class="p">,</span> <span class="mf">13.9</span><span class="p">,</span> <span class="mf">9.6</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+<span class="nv">$yData</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'labels'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'formatter'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Expr</span><span class="p">(</span><span class="s1">'function () { return this.value + " degrees C" }'</span><span class="p">),</span>
+            <span class="s1">'style'</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#AA4643'</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'text'</span>  <span class="o">=&gt;</span> <span class="s1">'Temperature'</span><span class="p">,</span>
+            <span class="s1">'style'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#AA4643'</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">'opposite'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'labels'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'formatter'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Expr</span><span class="p">(</span><span class="s1">'function () { return this.value + " mm" }'</span><span class="p">),</span>
+            <span class="s1">'style'</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#4572A7'</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">'gridLineWidth'</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'text'</span>  <span class="o">=&gt;</span> <span class="s1">'Rainfall'</span><span class="p">,</span>
+            <span class="s1">'style'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'#4572A7'</span><span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+<span class="nv">$categories</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'Jan'</span><span class="p">,</span> <span class="s1">'Feb'</span><span class="p">,</span> <span class="s1">'Mar'</span><span class="p">,</span> <span class="s1">'Apr'</span><span class="p">,</span> <span class="s1">'May'</span><span class="p">,</span> <span class="s1">'Jun'</span><span class="p">,</span> <span class="s1">'Jul'</span><span class="p">,</span> <span class="s1">'Aug'</span><span class="p">,</span> <span class="s1">'Sep'</span><span class="p">,</span> <span class="s1">'Oct'</span><span class="p">,</span> <span class="s1">'Nov'</span><span class="p">,</span> <span class="s1">'Dec'</span><span class="p">);</span>
+
+<span class="nv">$ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Highchart</span><span class="p">();</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">chart</span><span class="o">-&gt;</span><span class="na">renderTo</span><span class="p">(</span><span class="s1">'container'</span><span class="p">);</span> <span class="c1">// The #id of the div where to render the chart</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">chart</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="s1">'column'</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">'Average Monthly Weather Data for Tokyo'</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">xAxis</span><span class="o">-&gt;</span><span class="na">categories</span><span class="p">(</span><span class="nv">$categories</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">yAxis</span><span class="p">(</span><span class="nv">$yData</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">legend</span><span class="o">-&gt;</span><span class="na">enabled</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="nv">$formatter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Expr</span><span class="p">(</span><span class="s1">'function () {</span>
+<span class="s1">                 var unit = {</span>
+<span class="s1">                     "Rainfall": "mm",</span>
+<span class="s1">                     "Temperature": "degrees C"</span>
+<span class="s1">                 }[this.series.name];</span>
+<span class="s1">                 return this.x + ": &lt;b&gt;" + this.y + "&lt;/b&gt; " + unit;</span>
+<span class="s1">             }'</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">tooltip</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="p">(</span><span class="nv">$formatter</span><span class="p">);</span>
+<span class="nv">$ob</span><span class="o">-&gt;</span><span class="na">series</span><span class="p">(</span><span class="nv">$series</span><span class="p">);</span>
+</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
