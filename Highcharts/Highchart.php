@@ -61,18 +61,21 @@ class Highchart {
         $this->navigation = new ChartOption('navigation');
     }
 
+
     public function __call($name, $value)
     {
         $this->$name = $value;
+
         return $this;
     }
+
 
     public function render($engine = 'jquery')
     {
         $chartJS = "";
 
         // jQuery or MooTools
-        if($engine == 'mootools') {
+        if ($engine == 'mootools') {
             $chartJS = 'window.addEvent(\'domready\', function() {';
         } else {
             $chartJS = "$(function(){";
@@ -80,7 +83,7 @@ class Highchart {
         $chartJS .= "\n    var " . (isset($this->chart->renderTo)?$this->chart->renderTo:'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
-        if(get_object_vars($this->chart->chart)) {
+        if (get_object_vars($this->chart->chart)) {
             $chartJS .= "        chart: " .
                 Json::encode($this->chart->chart,
                              false,
@@ -88,22 +91,29 @@ class Highchart {
         }
 
         // Colors
-        if(!empty($this->colors)) {
+        if (!empty($this->colors)) {
             $chartJS .= "        colors: " . json_encode($this->colors) . ",\n";
         }
 
         // Credits
-        if(get_object_vars($this->credits->credits)) {
+        if (get_object_vars($this->credits->credits)) {
             $chartJS .= "        credits: " . json_encode($this->credits->credits) . ",\n";
         }
 
         // Exporting
+        if (get_object_vars($this->exporting->exporting)) {
+            $chartJS .= "        exporting: " .
+                Json::encode($this->exporting->exporting,
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
+        }
+
         // Global
         // Labels
         // Lang
 
         // Legend
-        if(get_object_vars($this->legend->legend)) {
+        if (get_object_vars($this->legend->legend)) {
             $chartJS .= "        legend: " .
                 Json::encode($this->legend->legend,
                              false,
@@ -115,7 +125,7 @@ class Highchart {
         // Pane
 
         // PlotOptions
-        if(get_object_vars($this->plotOptions->plotOptions)) {
+        if (get_object_vars($this->plotOptions->plotOptions)) {
             $chartJS .= "        plotOptions: " .
                 Json::encode($this->plotOptions->plotOptions,
                              false,
@@ -123,7 +133,7 @@ class Highchart {
         }
 
         // Series
-        if(!empty($this->series)) {
+        if (!empty($this->series)) {
             $chartJS .= "        series: " .
                 Json::encode($this->series[0],
                              false,
@@ -131,19 +141,19 @@ class Highchart {
         }
 
         // Subtitle
-        if(get_object_vars($this->subtitle->subtitle)) {
+        if (get_object_vars($this->subtitle->subtitle)) {
             $chartJS .= "        subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
         }
 
         // Symbols
 
         // Title
-        if(get_object_vars($this->title->title)) {
+        if (get_object_vars($this->title->title)) {
             $chartJS .= "        title: " . json_encode($this->title->title) . ",\n";
         }
 
         // Tooltip
-        if(get_object_vars($this->tooltip->tooltip)) {
+        if (get_object_vars($this->tooltip->tooltip)) {
             $chartJS .= "        tooltip: " .
                 Json::encode($this->tooltip->tooltip,
                              false,
@@ -151,7 +161,7 @@ class Highchart {
         }
 
         // xAxis
-        if(get_object_vars($this->xAxis->xAxis)) {
+        if (get_object_vars($this->xAxis->xAxis)) {
             $chartJS .= "        xAxis: " .
                 Json::encode($this->xAxis->xAxis,
                              false,
@@ -159,29 +169,21 @@ class Highchart {
         }
 
         // yAxis
-	if(gettype($this->yAxis) === 'array') {
-	  if(!empty($this->yAxis)) {
-	    $chartJS .= "        yAxis: " .
-	      Json::encode($this->yAxis[0],
-			   false,
-			   array('enableJsonExprFinder' => true)) . ",\n";
-	  }
-	} else if(gettype($this->yAxis) === 'object') {
-	  if(get_object_vars($this->yAxis->yAxis)) {
-	    $chartJS .= "        yAxis: " .
-	      Json::encode($this->yAxis->yAxis,
-			   false,
-			   array('enableJsonExprFinder' => true)) . ",\n";
-	  }
-	}
-	
-	// exporting
-	if(get_object_vars($this->exporting->exporting)) {
-	  $chartJS .= "        exporting: " .
-	    Json::encode($this->exporting->exporting,
-			false,
-			array('enableJsonExprFinder' => true)) . ",\n";
-	}
+        if (gettype($this->yAxis) === 'array') {
+            if (!empty($this->yAxis)) {
+                $chartJS .= "        yAxis: " .
+                    Json::encode($this->yAxis[0],
+                        false,
+                        array('enableJsonExprFinder' => true)) . ",\n";
+            }
+        } elseif (gettype($this->yAxis) === 'object') {
+            if (get_object_vars($this->yAxis->yAxis)) {
+                $chartJS .= "        yAxis: " .
+                    Json::encode($this->yAxis->yAxis,
+                        false,
+                        array('enableJsonExprFinder' => true)) . ",\n";
+            }
+        }
 
         $chartJS .= "    });\n  });\n";
 

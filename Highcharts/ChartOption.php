@@ -27,6 +27,7 @@ class ChartOption {
     {
         $option_name = $this->option_name;
         $this->{$option_name}->{$name} = $value[0];
+
         return $this;
     }
 
