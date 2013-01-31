@@ -174,6 +174,14 @@ class Highchart {
 			   array('enableJsonExprFinder' => true)) . ",\n";
 	  }
 	}
+	
+	// exporting
+	if(get_object_vars($this->exporting->exporting)) {
+	  $chartJS .= "        exporting: " .
+	    Json::encode($this->exporting->exporting,
+			false,
+			array('enableJsonExprFinder' => true)) . ",\n";
+	}
 
         $chartJS .= "    });\n  });\n";
 
