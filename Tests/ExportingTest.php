@@ -11,13 +11,52 @@ use Zend\Json\Expr;
 class ExportingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * buttons option (true/false)
+     * buttons option
+     *
+     * TODO: complete tests
      */
-    // TODO: write test
+    public function testButtons()
+    {
+        $chart = new Highchart();
 
-    
+        // align option (string - left/center/right)
+        $chart->exporting->buttons(array('exportButton' => array('align' => 'center')));
+        $this->assertRegExp('/exporting: \{"buttons":\{"exportButton":\{"align":"center"\}\}\}/', $chart->render());
+        $chart->exporting->buttons(array('printButton' => array('align' => 'center')));
+        $this->assertRegExp('/exporting: \{"buttons":\{"printButton":\{"align":"center"\}\}\}/', $chart->render());
+
+        // backgroundColor option
+        $chart->exporting->buttons(array('exportButton' => array('backgroundColor' => 'blue')));
+        $this->assertRegExp('/exporting: \{"buttons":\{"exportButton":\{"backgroundColor":"blue"\}\}\}/', $chart->render());
+        $chart->exporting->buttons(array('printButton' => array('backgroundColor' => 'blue')));
+        $this->assertRegExp('/exporting: \{"buttons":\{"printButton":\{"backgroundColor":"blue"\}\}\}/', $chart->render());
+
+        // borderColor option
+        // borderRadius option
+        // borderWidth option
+        // enabled option
+        // height option
+        // hoverBorderColor option
+        // hoverSymbolFill option
+        // hoverSymbolStroke option
+        // menuItems option
+        // onclick option
+        // symbol option
+        // symbolFill option
+        // symbolSize option
+        // symbolStroke option (color)
+        // symbolStrokeWidth option (integer - stroke width in px)
+        // symbolX option (float)
+        // symbolY option (float)
+        // verticalAlign option (string - top/middle/bottom)
+        // width option (integer - width in px)
+        // x option (integer - horizontal offset in px)
+        // y option (integer - vertical offset in px)
+    }
+
+
     /**
-     * chartOptions option (true/false)
+     * chartOptions option
      */
     // TODO: write test
 
