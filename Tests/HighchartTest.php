@@ -48,4 +48,19 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
         $chart->credits->enabled(true);
         $this->assertTrue($chart->credits->enabled == true);
     }
+
+
+    /**
+     * Look for that mean trailing comma
+     */
+    public function testIeFriendliness()
+    {
+        $chart = new Highchart();
+
+        $chart->chart->setTitle('Am I IE friendly yet?');
+        $this->assertRegExp(
+            '/\}(?<!,)\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            $chart->render()
+        );
+    }
 }
