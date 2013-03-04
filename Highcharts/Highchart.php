@@ -185,7 +185,8 @@ class Highchart {
             }
         }
 
-        $chartJS .= "    });\n  });\n";
+        // trim last trailing comma and close parenthesis
+        $chartJS = rtrim($chartJS, ",\n") . "\n    });\n});\n";
 
         return trim($chartJS);
     }
