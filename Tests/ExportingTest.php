@@ -69,10 +69,10 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         $chart = new Highchart();
 
         $chart->exporting->enabled(true);
-        $this->assertRegExp('/exporting: \{"enabled":true\},/', $chart->render());
+        $this->assertRegExp('/exporting: \{"enabled":true\}/', $chart->render());
 
         $chart->exporting->enabled(false);
-        $this->assertRegExp('/exporting: \{"enabled":false\},/', $chart->render());
+        $this->assertRegExp('/exporting: \{"enabled":false\}/', $chart->render());
     }
 
 
@@ -84,7 +84,7 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         $chart = new Highchart();
         $chart->exporting->filename("graph");
 
-        $this->assertRegExp('/exporting: \{"filename":"graph"\},/', $chart->render());
+        $this->assertRegExp('/exporting: \{"filename":"graph"\}/', $chart->render());
     }
 
 
@@ -132,6 +132,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         $chart = new Highchart();
         $chart->exporting->width(300);
 
-        $this->assertRegExp('/exporting: \{"width":300\},/', $chart->render());
+        $this->assertRegExp('/exporting: \{"width":300\}/', $chart->render());
     }
 }
