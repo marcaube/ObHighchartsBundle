@@ -12,18 +12,12 @@
     "require": {
         "php": ">=5.3.0",
         "symfony/symfony": "2.*",
-        "zendframework/zend-json":"2.0.*"
+        "zendframework/zend-json": "2.1.*@dev"
     },
     "autoload": {
         "psr-0": {
             "Ob\\HighchartsBundle": ""
         }
     },
-    "target-dir": "Ob/HighchartsBundle",
-    "repositories":[
-        {
-            "type":"composer",
-            "url":"http://packages.zendframework.com/"
-        }
-    ]
+    "target-dir": "Ob/HighchartsBundle"
 }

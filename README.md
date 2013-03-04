@@ -26,71 +26,14 @@ code.
 
 ### Installation
 
-1. Add `"ob/highcharts-bundle": "dev-master"` to your `composer.json` file
-
-   This bundle depends on Zend's Json module, and because composer does not load repositories recursively, you may want
-   to add this to your composer to load only the Json module (200k) instead of the complete Zend Framework (95M). 
-   See [why can't composer load repositories recursively](http://getcomposer.org/doc/faqs/why-can%27t-composer-load-repositories-recursively.md)
-   
-   ``` json
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packages.zendframework.com/"
-        }
-    ]
-   ```
-
-   Your Symfony2 composer file would look like
-   ``` json
-   {
-       "name": "symfony/framework-standard-edition",
-       "description": "The \"Symfony Standard Edition\" distribution",
-       "autoload": {
-           "psr-0": { "": "src/" }
-       },
+1. Add the following to your `composer.json` file
+   ```json
        "require": {
-           "php": ">=5.3.3",
-           "symfony/symfony": "2.1.*",
-           "doctrine/orm": ">=2.2.3,<2.4-dev",
-           "doctrine/doctrine-bundle": "1.0.*",
-           "twig/extensions": "1.0.*",
-           "symfony/assetic-bundle": "2.1.*",
-           "symfony/swiftmailer-bundle": "2.1.*",
-           "symfony/monolog-bundle": "2.1.*",
-           "sensio/distribution-bundle": "2.1.*",
-           "sensio/framework-extra-bundle": "2.1.*",
-           "sensio/generator-bundle": "2.1.*",
-           "jms/security-extra-bundle": "1.2.*",
-           "jms/di-extra-bundle": "1.1.*",
+           ...
+           "zendframework/zend-json": "2.1.*@dev",
            "ob/highcharts-bundle": "dev-master"
-       },
-       "scripts": {
-           "post-install-cmd": [
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-           ],
-           "post-update-cmd": [
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-               "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-           ]
-       },
-       "minimum-stability": "dev",
-       "extra": {
-           "symfony-app-dir": "app",
-           "symfony-web-dir": "web"
-       },
-       "repositories":[
-           {
-               "type":"composer",
-               "url":"http://packages.zendframework.com/"
-           }
-       ]
-   }
+           ...
+       }
    ```
 
 2. Run `php composer.phar install`
