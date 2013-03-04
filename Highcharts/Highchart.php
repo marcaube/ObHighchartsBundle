@@ -109,6 +109,10 @@ class Highchart {
         }
 
         // Global
+        if (get_object_vars($this->global->global)) {
+            $chartJS .= "        global: " . json_encode($this->global->global) . ",\n";
+        }
+
         // Labels
         // Lang
 
