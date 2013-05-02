@@ -30,13 +30,12 @@ code.
    ```json
        "require": {
            ...
-           "zendframework/zend-json": "2.1.*@dev",
            "ob/highcharts-bundle": "dev-master"
            ...
        }
    ```
 
-2. Run `php composer.phar install`
+2. Run `php composer.phar update "ob/highcharts-bundle"`
 
 3. Register the bundle in your `app/AppKernel.php`:
 
