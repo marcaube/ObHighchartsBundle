@@ -9,7 +9,7 @@ use Zend\Json\Json;
  * See Highcharts documentation at http://www.highcharts.com/ref/
  *
  * @author  Marc Aubé
- * @date    2012-08-07
+ * @since   2012-08-07
  */
 class Highchart {
 
