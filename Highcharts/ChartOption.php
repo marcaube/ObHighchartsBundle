@@ -7,7 +7,7 @@ namespace Ob\HighchartsBundle\Highcharts;
  * See Highcharts documentation at http://www.highcharts.com/ref/#chart
  *
  * @author  Marc Aubé
- * @date    2012-08-07
+ * @since   2012-08-07
  */
 class ChartOption {
 
