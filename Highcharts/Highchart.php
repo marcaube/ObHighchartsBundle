@@ -173,13 +173,11 @@ class Highchart {
         }
 
         // yAxis
-        if (gettype($this->yAxis) === 'array') {
-            if (!empty($this->yAxis)) {
-                $chartJS .= "        yAxis: " .
-                    Json::encode($this->yAxis[0],
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
+        if (gettype($this->yAxis) === 'array' && !empty($this->yAxis)) {
+    		$chartJS .= "        yAxis: " .
+			    Json::encode($this->yAxis,
+                             false,
+                             array('enableJsonExprFinder' => true)) . ",\n";
         } elseif (gettype($this->yAxis) === 'object') {
             if (get_object_vars($this->yAxis->yAxis)) {
                 $chartJS .= "        yAxis: " .
