@@ -44,7 +44,7 @@ code.
    ```json
        "require": {
            ...
-           "ob/highcharts-bundle": "dev-master"
+           "ob/highcharts-bundle": "1.*"
            ...
        }
    ```
