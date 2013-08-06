@@ -5,9 +5,6 @@ namespace Ob\HighchartsBundle\Highcharts;
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/#chart
- *
- * @author  Marc Aubé
- * @since   2012-08-07
  */
 class ChartOption {
 

@@ -7,12 +7,9 @@ use Zend\Json\Json;
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
- *
- * @author  Marc Aubé
- * @since   2012-08-07
  */
-class Highchart {
-
+class Highchart
+{
     // Default options
     public $chart;
     public $colors;
@@ -31,8 +28,6 @@ class Highchart {
     public $tooltip;
     public $xAxis;
     public $yAxis;
-
-    // Exporting module
     public $exporting;
     public $navigation;
 
@@ -80,14 +75,14 @@ class Highchart {
         } else {
             $chartJS = "$(function(){";
         }
-        $chartJS .= "\n    var " . (isset($this->chart->renderTo)?$this->chart->renderTo:'chart') . " = new Highcharts.Chart({\n";
+        $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
         if (get_object_vars($this->chart->chart)) {
             $chartJS .= "        chart: " .
                 Json::encode($this->chart->chart,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // Colors
@@ -120,8 +115,8 @@ class Highchart {
         if (get_object_vars($this->legend->legend)) {
             $chartJS .= "        legend: " .
                 Json::encode($this->legend->legend,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // Loading
@@ -132,16 +127,16 @@ class Highchart {
         if (get_object_vars($this->plotOptions->plotOptions)) {
             $chartJS .= "        plotOptions: " .
                 Json::encode($this->plotOptions->plotOptions,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // Series
         if (!empty($this->series)) {
             $chartJS .= "        series: " .
                 Json::encode($this->series[0],
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // Subtitle
@@ -160,16 +155,16 @@ class Highchart {
         if (get_object_vars($this->tooltip->tooltip)) {
             $chartJS .= "        tooltip: " .
                 Json::encode($this->tooltip->tooltip,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // xAxis
         if (get_object_vars($this->xAxis->xAxis)) {
             $chartJS .= "        xAxis: " .
                 Json::encode($this->xAxis->xAxis,
-                             false,
-                             array('enableJsonExprFinder' => true)) . ",\n";
+                    false,
+                    array('enableJsonExprFinder' => true)) . ",\n";
         }
 
         // yAxis
