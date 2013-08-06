@@ -1,11 +1,16 @@
 # ObHighchartsBundle
 
-`ObHighchartsBundle` aims to ease the use of highcharts to display rich graph and charts in your Symfony2 application by
-providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library [Highcharts](http://www.highcharts.com).
+`ObHighchartsBundle` eases the use of highcharts to display rich graph and charts in your Symfony2 application by
+providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library
+[Highcharts](http://www.highcharts.com).
+
+DRY out your chart code by writing it all in PHP!
 
 [![Build Status](https://travis-ci.org/marcaube/ObHighchartsBundle.png?branch=master)](https://travis-ci.org/marcaube/ObHighchartsBundle)
+[![Total Downloads](https://poser.pugx.org/ob/highcharts-bundle/downloads.png)](https://packagist.org/packages/ob/highcharts-bundle)
 
 ## Content
+* License
 * The Why
 * How to get started / Installation
 * Usage
@@ -15,6 +20,15 @@ providing Twig extensions and PHP objects to do the heavy lifting. The bundle us
 * Cookbook
     * Pie chart with legend (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
     * Make a Multi-axes plot (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
+
+## License
+ObHighchartsBundle is released under the MIT License. See the bundled [LICENSE](https://github.com/marcaube/ObHighchartsBundle/blob/master/LICENSE)
+file for details.
+
+Please note that the Highcharts JS library bundled with the project is **not** free for commercial use, see their
+[FAQ](http://shop.highsoft.com/faq) for more details on what constitutes a non-commercial project or their [product page](http://shop.highsoft.com/highcharts.html)
+for details on pricing.
+
 
 ## Why ?
 
@@ -102,7 +116,9 @@ Voilà !
 
 
 ### Use highcharts with mootools
-If you'd like to use mootools instead of jquery to render your charts, just load the mootools adapter use the second argument of the twig extension like this 
+If you'd like to use mootools instead of jquery to render your charts, just load the mootools adapter use the second
+argument of the twig extension like this
+
 ``` html
 <!-- Load MooTools from Google's CDN if needed and the highcharts adapter -->
 <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js" type="text/javascript"></script>
