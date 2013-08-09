@@ -133,6 +133,21 @@ argument of the twig extension like this
 <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 ```
 
+### Use highcharts without a jquery or mootools wrapper
+It is also possible to render your highcharts code without a jquery or mootools wrapper. This is useful when you want
+control how and when the chart is loaded or when integrating with existing code.
+``` html
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script type="text/javascript">
+    myLib.chartLoad(function(data){
+        {{ chart(chart, false) }}
+    }
+</script>
+
+<div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+```
+
 ### Use a Javascript anonymous function
 There are several use case where you need to define a js function, let's see how to use one for a tooltip formatter
 

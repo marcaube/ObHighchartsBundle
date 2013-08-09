@@ -72,7 +72,7 @@ class Highchart
         // jQuery or MooTools
         if ($engine == 'mootools') {
             $chartJS = 'window.addEvent(\'domready\', function() {';
-        } else {
+        } elseif($engine == 'jquery') {
             $chartJS = "$(function(){";
         }
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
@@ -185,7 +185,11 @@ class Highchart
         }
 
         // trim last trailing comma and close parenthesis
-        $chartJS = rtrim($chartJS, ",\n") . "\n    });\n});\n";
+        $chartJS = rtrim($chartJS, ",\n") . "\n    });\n";
+
+        if($engine != false){
+            $chartJS .= "});\n";
+        }
 
         return trim($chartJS);
     }
