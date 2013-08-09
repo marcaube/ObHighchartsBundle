@@ -21,6 +21,18 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Render chart using jQuery
+     */
+    public function testNoEngine()
+    {
+        $chart = new Highchart();
+        $this->assertRegExp(
+            '/var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);/',
+            $chart->render(false)
+        );
+    }
+
 
     /**
      * Render chart using Mootools
