@@ -22,7 +22,7 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Render chart using jQuery
+     * Render chart without library wrapper
      */
     public function testNoEngine()
     {
