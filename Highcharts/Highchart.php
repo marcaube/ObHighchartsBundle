@@ -160,11 +160,20 @@ class Highchart
         }
 
         // xAxis
-        if (get_object_vars($this->xAxis->xAxis)) {
-            $chartJS .= "        xAxis: " .
-                Json::encode($this->xAxis->xAxis,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
+        if (gettype($this->xAxis) === 'array') {
+            if (!empty($this->xAxis)) {
+                $chartJS .= "        xAxis: " .
+                    Json::encode($this->xAxis[0],
+                        false,
+                        array('enableJsonExprFinder' => true)) . ",\n";
+            }
+        } elseif (gettype($this->xAxis) === 'object') {
+            if (get_object_vars($this->xAxis->xAxis)) {
+                $chartJS .= "        xAxis: " .
+                    Json::encode($this->xAxis->xAxis,
+                        false,
+                        array('enableJsonExprFinder' => true)) . ",\n";
+            }
         }
 
         // yAxis
