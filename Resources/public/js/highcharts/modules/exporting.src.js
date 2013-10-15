@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v3.0.1 (2013-04-09)
+ * @license Highcharts JS v3.0.6 (2013-10-04)
  * Exporting module
  *
  * (c) 2010-2013 Torstein Hønsi
@@ -101,6 +101,7 @@ defaultOptions.exporting = {
 	//scale: 2
 	buttons: {
 		contextButton: {
+			menuClassName: PREFIX + 'contextmenu',
 			//x: -10,
 			symbol: 'menu',
 			_titleKey: 'contextButtonTitle',
@@ -243,8 +244,7 @@ extend(Chart.prototype, {
 			height: sourceHeight
 		});
 		options.exporting.enabled = false; // hide buttons in print
-		options.chart.plotBackgroundImage = null; // the converter doesn't handle images
-
+		
 		// prepare for replicating the chart
 		options.series = [];
 		each(chart.series, function (serie) {
@@ -270,7 +270,7 @@ extend(Chart.prototype, {
 					userMin = extremes.userMin,
 					userMax = extremes.userMax;
 
-				if (userMin !== UNDEFINED || userMax !== UNDEFINED) {
+				if (axisCopy && (userMin !== UNDEFINED || userMax !== UNDEFINED)) {
 					axisCopy.setExtremes(userMin, userMax, true, false);
 				}
 			});
@@ -310,7 +310,7 @@ extend(Chart.prototype, {
 			.replace(/width=([^" ]+)/g, 'width="$1"')
 			.replace(/hc-svg-href="([^"]+)">/g, 'xlink:href="$1"/>')
 			.replace(/id=([^" >]+)/g, 'id="$1"')
-			.replace(/class=([^" ]+)/g, 'class="$1"')
+			.replace(/class=([^" >]+)/g, 'class="$1"')
 			.replace(/ transform /g, ' ')
 			.replace(/:(path|rect)/g, '$1')
 			.replace(/style="([^"]+)"/g, function (s) {
@@ -320,9 +320,6 @@ extend(Chart.prototype, {
 		// IE9 beta bugs with innerHTML. Test again with final IE9.
 		svg = svg.replace(/(url\(#highcharts-[0-9]+)&quot;/g, '$1')
 			.replace(/&quot;/g, "'");
-		if (svg.match(/ xmlns="/g).length === 2) {
-			svg = svg.replace(/xmlns="[^"]+"/, '');
-		}
 
 		return svg;
 	},
@@ -339,12 +336,12 @@ extend(Chart.prototype, {
 			chartExportingOptions = chart.options.exporting,
 			svg = chart.getSVG(merge(
 				{ chart: { borderRadius: 0 } },
-				chartExportingOptions,
+				chartExportingOptions.chartOptions,
 				chartOptions, 
 				{
 					exporting: {
-						sourceWidth: options.sourceWidth || chartExportingOptions.sourceWidth, // docs: option and parameter in exportChart()
-						sourceHeight: options.sourceHeight || chartExportingOptions.sourceHeight // docs
+						sourceWidth: options.sourceWidth || chartExportingOptions.sourceWidth,
+						sourceHeight: options.sourceHeight || chartExportingOptions.sourceHeight
 					}
 				}
 			));
@@ -418,20 +415,20 @@ extend(Chart.prototype, {
 	/**
 	 * Display a popup menu for choosing the export type
 	 *
-	 * @param {String} name An identifier for the menu
+	 * @param {String} className An identifier for the menu
 	 * @param {Array} items A collection with text and onclicks for the items
 	 * @param {Number} x The x position of the opener button
 	 * @param {Number} y The y position of the opener button
 	 * @param {Number} width The width of the opener button
 	 * @param {Number} height The height of the opener button
 	 */
-	contextMenu: function (name, items, x, y, width, height, button) {
+	contextMenu: function (className, items, x, y, width, height, button) {
 		var chart = this,
 			navOptions = chart.options.navigation,
 			menuItemStyle = navOptions.menuItemStyle,
 			chartWidth = chart.chartWidth,
 			chartHeight = chart.chartHeight,
-			cacheName = 'cache-' + name,
+			cacheName = 'cache-' + className,
 			menu = chart[cacheName],
 			menuPadding = mathMax(width, height), // for mouse leave detection
 			boxShadow = '3px 3px 10px #888',
@@ -445,7 +442,7 @@ extend(Chart.prototype, {
 
 			// create a HTML element above the SVG
 			chart[cacheName] = menu = createElement(DIV, {
-				className: PREFIX + name
+				className: className
 			}, {
 				position: ABSOLUTE,
 				zIndex: 1000,
@@ -465,6 +462,7 @@ extend(Chart.prototype, {
 				if (button) {
 					button.setState(0);
 				}
+				chart.openMenu = false;
 			};
 
 			// Hide the menu some time after mouse leave (#1357)
@@ -473,6 +471,12 @@ extend(Chart.prototype, {
 			});
 			addEvent(menu, 'mouseenter', function () {
 				clearTimeout(hideTimer);
+			});
+			// Hide it on clicking or touching outside the menu (#2258)
+			addEvent(document, 'mousedown', function (e) {
+				if (!chart.pointer.inClass(e.target, className)) {
+					hide();
+				}
 			});
 
 
@@ -519,13 +523,14 @@ extend(Chart.prototype, {
 			menuStyle.left = (x - menuPadding) + PX;
 		}
 		// if outside bottom, bottom align it
-		if (y + height + chart.exportMenuHeight > chartHeight) {
+		if (y + height + chart.exportMenuHeight > chartHeight && button.alignOptions.verticalAlign !== 'top') {
 			menuStyle.bottom = (chartHeight - y - menuPadding)  + PX;
 		} else {
 			menuStyle.top = (y + height - menuPadding) + PX;
 		}
 
 		css(menu, menuStyle);
+		chart.openMenu = true;
 	},
 
 	/**
@@ -543,13 +548,10 @@ extend(Chart.prototype, {
 				stroke: btnOptions.symbolStroke,
 				fill: btnOptions.symbolFill
 			},
-			symbolSize = btnOptions.symbolSize || 12,
-			menuKey;
-
+			symbolSize = btnOptions.symbolSize || 12;
 		if (!chart.btnCount) {
 			chart.btnCount = 0;
 		}
-		menuKey = chart.btnCount++;
 
 		// Keeps references to the button elements
 		if (!chart.exportDivElements) {
@@ -578,7 +580,7 @@ extend(Chart.prototype, {
 		} else if (menuItems) {
 			callback = function () {
 				chart.contextMenu(
-					'contextmenu', 
+					button.menuClassName, 
 					menuItems, 
 					button.translateX, 
 					button.translateY, 
@@ -607,6 +609,7 @@ extend(Chart.prototype, {
 				title: chart.options.lang[btnOptions._titleKey],
 				'stroke-linecap': 'round'
 			});
+		button.menuClassName = options.menuClassName || PREFIX + 'menu-' + chart.btnCount++;
 
 		if (btnOptions.symbol) {
 			symbol = renderer.symbol(
@@ -645,9 +648,12 @@ extend(Chart.prototype, {
 		// Destroy the extra buttons added
 		for (i = 0; i < chart.exportSVGElements.length; i++) {
 			elem = chart.exportSVGElements[i];
+			
 			// Destroy and null the svg/vml elements
-			elem.onclick = elem.ontouchstart = null;
-			chart.exportSVGElements[i] = elem.destroy();
+			if (elem) { // #1822
+				elem.onclick = elem.ontouchstart = null;
+				chart.exportSVGElements[i] = elem.destroy();
+			}
 		}
 
 		// Destroy the divs for the menu
