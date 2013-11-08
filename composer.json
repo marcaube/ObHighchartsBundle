@@ -4,6 +4,7 @@
     "description": "Symfony2 Bundle that ease the use of highcharts to display rich graph and charts in your app",
     "keywords": ["symfony2", "charting", "charts", "highcharts", "chart", "graph", "graphs", "ob", "marcaube"],
     "homepage": "https://github.com/marcaube/ObHighchartsBundle",
+    "license": "MIT",
     "authors": [
         {
             "name": "Marc Aubé"
