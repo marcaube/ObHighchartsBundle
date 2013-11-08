@@ -12,7 +12,7 @@ class HighchartsExtension extends \Twig_Extension
         );
     }
 
-    public function chart($chart, $engine = 'jquery')
+    public function chart(HighChart $chart, $engine = 'jquery')
     {
         return $chart->render($engine);
     }
