@@ -6,6 +6,9 @@ php:
 
 env:
   - SYMFONY_VERSION=origin/2.0
+  - SYMFONY_VERSION=origin/2.1
+  - SYMFONY_VERSION=origin/2.2
+  - SYMFONY_VERSION=origin/2.3
 
 before_script:
   - wget http://getcomposer.org/composer.phar
