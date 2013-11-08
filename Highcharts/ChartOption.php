@@ -6,20 +6,25 @@ namespace Ob\HighchartsBundle\Highcharts;
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/#chart
  */
-class ChartOption {
-
-    // Used to keep track of the option name (chart, credits, global, labels, etc)
+class ChartOption
+{
     private $option_name;
 
-
-    // Beware : voodoo magic below ...
-
+    /**
+     * @param string $name
+     */
     public function __construct($name)
     {
         $this->option_name = $name;
         $this->{$name} = new \stdClass();
     }
 
+    /**
+     * @param string $name
+     * @param array  $value
+     *
+     * @return $this
+     */
     public function __call($name, $value)
     {
         $option_name = $this->option_name;
@@ -28,6 +33,11 @@ class ChartOption {
         return $this;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
     public function __get($name)
     {
         $option_name = $this->option_name;

@@ -56,7 +56,12 @@ class Highchart
         $this->navigation = new ChartOption('navigation');
     }
 
-
+    /**
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return $this
+     */
     public function __call($name, $value)
     {
         $this->$name = $value;
@@ -64,7 +69,11 @@ class Highchart
         return $this;
     }
 
-
+    /**
+     * @param string $engine
+     *
+     * @return string
+     */
     public function render($engine = 'jquery')
     {
         $chartJS = "";
