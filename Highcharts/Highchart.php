@@ -52,7 +52,7 @@ class Highchart
         $this->tooltip = new ChartOption('tooltip');
         $this->xAxis = new ChartOption('xAxis');
         $this->yAxis = new ChartOption('yAxis');
-        $this->pane = new ChartOptions('pane');
+        $this->pane = new ChartOption('pane');
 
         $this->exporting = new ChartOption('exporting');
         $this->navigation = new ChartOption('navigation');
