@@ -30,6 +30,7 @@ class Highchart
     public $yAxis;
     public $exporting;
     public $navigation;
+    public $pane;
 
 
     public function __construct()
@@ -51,6 +52,7 @@ class Highchart
         $this->tooltip = new ChartOption('tooltip');
         $this->xAxis = new ChartOption('xAxis');
         $this->yAxis = new ChartOption('yAxis');
+        $this->pane = new ChartOptions('pane');
 
         $this->exporting = new ChartOption('exporting');
         $this->navigation = new ChartOption('navigation');
@@ -131,6 +133,9 @@ class Highchart
         // Loading
         // Navigation
         // Pane
+        if (get_object_vars($this->pane->pane)) {
+            $chartJS .= "        pane: " . json_encode($this->pane->pane) . ",\n";
+        }
 
         // PlotOptions
         if (get_object_vars($this->plotOptions->plotOptions)) {
