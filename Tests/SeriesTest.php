@@ -14,7 +14,6 @@ class SeriesTest extends \PHPUnit_Framework_TestCase
      */
     private $series;
 
-
     /**
      * Initialises the data
      */
@@ -25,7 +24,6 @@ class SeriesTest extends \PHPUnit_Framework_TestCase
             array("name" => "Data Serie #2", "data" => array(7,3,5,1,6,5,9))
         );
     }
-
 
     /**
      * Series output

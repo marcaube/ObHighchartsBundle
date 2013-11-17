@@ -33,7 +33,6 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * Render chart using Mootools
      */
@@ -45,7 +44,6 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
             $chart->render('mootools')
         );
     }
-
 
     /**
      * Magic getters and setters
@@ -60,7 +58,6 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
         $chart->credits->enabled(true);
         $this->assertTrue($chart->credits->enabled == true);
     }
-
 
     /**
      * Look for that mean trailing comma

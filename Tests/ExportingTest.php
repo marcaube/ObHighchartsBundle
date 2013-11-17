@@ -54,12 +54,10 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         // y option (integer - vertical offset in px)
     }
 
-
     /**
      * chartOptions option
      */
     // TODO: write test
-
 
     /**
      * enabled option (true/false)
@@ -75,7 +73,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/exporting: \{"enabled":false\}/', $chart->render());
     }
 
-
     /**
      * filename option (string)
      */
@@ -86,7 +83,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
 
         $this->assertRegExp('/exporting: \{"filename":"graph"\}/', $chart->render());
     }
-
 
     /**
      * type option (string - image/png, image/jpeg, application/pdf or image/svg+xml)
@@ -109,7 +105,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/exporting: \{"type":"image\/svg\+xml"\}/', $chart->render());
     }
 
-
     /**
      * url option (string)
      */
@@ -122,7 +117,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
 
         $this->assertRegExp('/exporting: \{"url":"http:\/\/www.google.com"\}/', $chart->render());
     }
-
 
     /**
      * width option (integer - width in px)

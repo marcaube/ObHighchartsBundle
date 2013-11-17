@@ -26,7 +26,6 @@ class LegendTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/legend: \{"align":"right"\}/', $chart->render());
     }
 
-
     /**
      * Layout option (horizontal/vertical)
      */
@@ -40,7 +39,6 @@ class LegendTest extends \PHPUnit_Framework_TestCase
         $chart->legend->layout("vertical");
         $this->assertRegExp('/legend: \{"layout":"vertical"\}/', $chart->render());
     }
-
 
     /**
      * Enabled option (true/false)

@@ -5,7 +5,6 @@ namespace Ob\HighchartsBundle\Tests;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Zend\Json\Expr;
 
-
 /**
  * This class hold Unit tests for the tooltip option
  */
@@ -25,7 +24,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/tooltip: \{"animation":"false"\}/', $chart->render());
     }
 
-
     /**
      * backgroundColor option (rgba)
      */
@@ -36,7 +34,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $chart->tooltip->backgroundColor("rgba(255, 255, 255, .85)");
         $this->assertRegExp('/tooltip: \{"backgroundColor":"rgba\(255, 255, 255, .85\)"\}/', $chart->render());
     }
-
 
     /**
      * borderColor option (null/auto/rgba)
@@ -55,7 +52,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/tooltip: \{"borderColor":"rgba\(255, 255, 255, .85\)"\}/', $chart->render());
     }
 
-
     /**
      * borderRadius option (integer - radius in px)
      */
@@ -69,7 +65,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $chart->tooltip->borderRadius("5");
         $this->assertRegExp('/tooltip: \{"borderRadius":"5"\}/', $chart->render());
     }
-
 
     /**
      * borderWidth option (integer - width in px)
@@ -85,7 +80,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/tooltip: \{"borderWidth":"5"\}/', $chart->render());
     }
 
-
     /**
      * enabled option (true/false)
      */
@@ -100,7 +94,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/tooltip: \{"enabled":"false"\}/', $chart->render());
     }
 
-
     /**
      * Formatter option (Zend Json Expr)
      */
@@ -113,7 +106,6 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
         $chart->tooltip->formatter($func);
         $this->assertRegExp('/tooltip: \{"formatter":function\(\) \{ return 1; \}\}/', $chart->render());
     }
-
 
     /**
      * shadow option (true/false)
