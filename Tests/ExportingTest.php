@@ -12,8 +12,6 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * buttons option
-     *
-     * TODO: complete tests
      */
     public function testButtons()
     {
@@ -52,12 +50,20 @@ class ExportingTest extends \PHPUnit_Framework_TestCase
         // width option (integer - width in px)
         // x option (integer - horizontal offset in px)
         // y option (integer - vertical offset in px)
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
     }
 
     /**
      * chartOptions option
      */
-    // TODO: write test
+    public function testChartOptions()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
 
     /**
      * enabled option (true/false)
