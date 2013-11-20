@@ -95,12 +95,7 @@ class Highchart
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
-        if (get_object_vars($this->chart->chart)) {
-            $chartJS .= "        chart: " .
-                Json::encode($this->chart->chart,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");
 
         // Colors
         if (!empty($this->colors)) {
@@ -113,12 +108,7 @@ class Highchart
         }
 
         // Exporting
-        if (get_object_vars($this->exporting->exporting)) {
-            $chartJS .= "        exporting: " .
-                Json::encode($this->exporting->exporting,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->exporting->exporting, "exporting");
 
         // Global
         if (get_object_vars($this->global->global)) {
@@ -129,12 +119,7 @@ class Highchart
         // Lang
 
         // Legend
-        if (get_object_vars($this->legend->legend)) {
-            $chartJS .= "        legend: " .
-                Json::encode($this->legend->legend,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->legend->legend, "legend");
 
         // Loading
         // Navigation
@@ -144,20 +129,10 @@ class Highchart
         }
 
         // PlotOptions
-        if (get_object_vars($this->plotOptions->plotOptions)) {
-            $chartJS .= "        plotOptions: " .
-                Json::encode($this->plotOptions->plotOptions,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->plotOptions->plotOptions, "plotOptions");
 
         // Series
-        if (!empty($this->series)) {
-            $chartJS .= "        series: " .
-                Json::encode($this->series[0],
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
 
         // Subtitle
         if (get_object_vars($this->subtitle->subtitle)) {
@@ -172,45 +147,20 @@ class Highchart
         }
 
         // Tooltip
-        if (get_object_vars($this->tooltip->tooltip)) {
-            $chartJS .= "        tooltip: " .
-                Json::encode($this->tooltip->tooltip,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->tooltip->tooltip, "tooltip");
 
         // xAxis
         if (gettype($this->xAxis) === 'array') {
-            if (!empty($this->xAxis)) {
-                $chartJS .= "        xAxis: " .
-                    Json::encode($this->xAxis[0],
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
+            $chartJS .= $this->renderWithJavascriptCallback($this->xAxis, "xAxis");
         } elseif (gettype($this->xAxis) === 'object') {
-            if (get_object_vars($this->xAxis->xAxis)) {
-                $chartJS .= "        xAxis: " .
-                    Json::encode($this->xAxis->xAxis,
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
+            $chartJS .= $this->renderWithJavascriptCallback($this->xAxis->xAxis, "xAxis");
         }
 
         // yAxis
         if (gettype($this->yAxis) === 'array') {
-            if (!empty($this->yAxis)) {
-                $chartJS .= "        yAxis: " .
-                    Json::encode($this->yAxis[0],
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
+            $chartJS .= $this->renderWithJavascriptCallback($this->yAxis, "yAxis");
         } elseif (gettype($this->yAxis) === 'object') {
-            if (get_object_vars($this->yAxis->yAxis)) {
-                $chartJS .= "        yAxis: " .
-                    Json::encode($this->yAxis->yAxis,
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
+            $chartJS .= $this->renderWithJavascriptCallback($this->yAxis->yAxis, "yAxis");
         }
 
         // trim last trailing comma and close parenthesis
@@ -222,4 +172,60 @@ class Highchart
 
         return trim($chartJS);
     }
+
+    /**
+     * @param ChartOption|array $chartOption
+     * @param string            $name
+     *
+     * @return string
+     */
+    private function renderWithJavascriptCallback($chartOption, $name)
+    {
+        $result = "";
+
+        if (gettype($chartOption) === 'array') {
+            $result .= $this->renderArrayWithCallback($chartOption, $name);
+        }
+
+        if (gettype($chartOption) === 'object') {
+            $result .= $this->renderObjectWithCallback($chartOption, $name);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array  $chartOption
+     * @param string $name
+     *
+     * @return string
+     */
+    private function renderArrayWithCallback($chartOption, $name)
+    {
+        $result = "";
+
+        if (!empty($chartOption)) {
+            $result .= $name . ": " . Json::encode($chartOption[0], false, array('enableJsonExprFinder' => true)) . ", \n";
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param ChartOption $chartOption
+     * @param string      $name
+     *
+     * @return string
+     */
+    private function renderObjectWithCallback($chartOption, $name)
+    {
+        $result = "";
+
+        if (get_object_vars($chartOption)) {
+            $result .= $name . ": " . Json::encode($chartOption, false, array('enableJsonExprFinder' => true)) . ",\n";
+        }
+
+        return $result;
+    }
+
 }
