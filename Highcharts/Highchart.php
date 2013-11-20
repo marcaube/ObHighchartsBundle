@@ -34,27 +34,34 @@ class Highchart
 
     public function __construct()
     {
-        $this->chart = new ChartOption('chart');
-        $this->colors = array();
-        $this->credits = new ChartOption('credits');
-        $this->global = new ChartOption('global');
-        $this->labels = new ChartOption('labels');
-        $this->lang = new ChartOption('lang');
-        $this->legend = new ChartOption('legend');
-        $this->loading = new ChartOption('loading');
-        $this->plotOptions = new ChartOption('plotOptions');
-        $this->point = new ChartOption('point');
-        $this->series = array();
-        $this->subtitle = new ChartOption('subtitle');
-        $this->symbols = array();
-        $this->title = new ChartOption('title');
-        $this->tooltip = new ChartOption('tooltip');
-        $this->xAxis = new ChartOption('xAxis');
-        $this->yAxis = new ChartOption('yAxis');
-        $this->pane = new ChartOption('pane');
+        $chartOptions = array('chart', 'credits', 'global', 'labels', 'lang', 'legend', 'loading', 'plotOptions',
+            'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting', 'navigation');
 
-        $this->exporting = new ChartOption('exporting');
-        $this->navigation = new ChartOption('navigation');
+        foreach ($chartOptions as $option) {
+            $this->initChartOption($option);
+        }
+
+        $arrayOptions = array('colors', 'series', 'symbols');
+
+        foreach ($arrayOptions as $option) {
+            $this->initArrayOption($option);
+        }
+    }
+
+    /**
+     * @param string $name
+     */
+    private function initChartOption($name)
+    {
+        $this->{$name} = new ChartOption($name);
+    }
+
+    /**
+     * @param string $name
+     */
+    private function initArrayOption($name)
+    {
+        $this->{$name} = array();
     }
 
     /**
