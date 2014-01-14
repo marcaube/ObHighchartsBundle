@@ -1,7 +1,7 @@
 <?php
 namespace Ob\HighchartsBundle\Twig;
 
-use Ob\HighchartsBundle\Highcharts\HighChart;
+use Ob\HighchartsBundle\Highcharts\ChartInterface;
 
 class HighchartsExtension extends \Twig_Extension
 {
@@ -12,7 +12,7 @@ class HighchartsExtension extends \Twig_Extension
         );
     }
 
-    public function chart(HighChart $chart, $engine = 'jquery')
+    public function chart(ChartInterface $chart, $engine = 'jquery')
     {
         return $chart->render($engine);
     }

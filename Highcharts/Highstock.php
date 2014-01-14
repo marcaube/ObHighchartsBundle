@@ -2,74 +2,12 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
-use Zend\Json\Json;
-
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
  */
-class Highstock
+class Highstock extends AbstractChart implements ChartInterface
 {
-    // Default options
-    public $chart;
-    public $colors;
-    public $credits;
-    public $global;
-    public $labels;
-    public $lang;
-    public $legend;
-    public $loading;
-    public $plotOptions;
-    public $point;
-    public $series;
-    public $subtitle;
-    public $symbols;
-    public $title;
-    public $tooltip;
-    public $xAxis;
-    public $yAxis;
-    public $exporting;
-    public $navigation;
-    public $pane;
-
-    public function __construct()
-    {
-        $this->chart = new ChartOption('chart');
-        $this->colors = array();
-        $this->credits = new ChartOption('credits');
-        $this->global = new ChartOption('global');
-        $this->labels = new ChartOption('labels');
-        $this->lang = new ChartOption('lang');
-        $this->legend = new ChartOption('legend');
-        $this->loading = new ChartOption('loading');
-        $this->plotOptions = new ChartOption('plotOptions');
-        $this->point = new ChartOption('point');
-        $this->series = array();
-        $this->subtitle = new ChartOption('subtitle');
-        $this->symbols = array();
-        $this->title = new ChartOption('title');
-        $this->tooltip = new ChartOption('tooltip');
-        $this->xAxis = new ChartOption('xAxis');
-        $this->yAxis = new ChartOption('yAxis');
-        $this->pane = new ChartOption('pane');
-
-        $this->exporting = new ChartOption('exporting');
-        $this->navigation = new ChartOption('navigation');
-    }
-
-    /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    public function __call($name, $value)
-    {
-        $this->$name = $value;
-
-        return $this;
-    }
-
     /**
      * @param string $engine
      *
