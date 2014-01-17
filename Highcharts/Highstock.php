@@ -2,6 +2,8 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
+use Zend\Json\Json;
+
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
