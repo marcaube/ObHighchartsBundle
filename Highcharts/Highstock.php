@@ -25,7 +25,7 @@ class Highstock extends AbstractChart implements ChartInterface
         } elseif ($engine == 'jquery') {
             $chartJS = "$(function(){";
         }
-        $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
+        $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.StockChart({\n";
 
         // Chart Option
         if (get_object_vars($this->chart->chart)) {
