@@ -46,7 +46,7 @@ abstract class AbstractChart
         }
     }
 
-    abstract function render();
+    public abstract function render();
 
     /**
      * @param string $name
