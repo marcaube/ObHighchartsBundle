@@ -16,6 +16,7 @@ abstract class AbstractChart
     public $legend;
     public $loading;
     public $plotOptions;
+    public $rangeSelector;
     public $point;
     public $series;
     public $subtitle;
@@ -31,7 +32,8 @@ abstract class AbstractChart
     public function __construct()
     {
         $chartOptions = array('chart', 'credits', 'global', 'labels', 'lang', 'legend', 'loading', 'plotOptions',
-            'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting', 'navigation');
+            'rangeSelector', 'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting',
+            'navigation');
 
         foreach ($chartOptions as $option) {
             $this->initChartOption($option);

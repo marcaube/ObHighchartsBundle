@@ -53,13 +53,7 @@ class Highstock extends AbstractChart implements ChartInterface
                     array('enableJsonExprFinder' => true)) . ",\n";
         }
 
-        // Global
-        if (get_object_vars($this->global->global)) {
-            $chartJS .= "        global: " . json_encode($this->global->global) . ",\n";
-        }
-
         // Labels
-        // Lang
 
         // Legend
         if (get_object_vars($this->legend->legend)) {
@@ -71,10 +65,6 @@ class Highstock extends AbstractChart implements ChartInterface
 
         // Loading
         // Navigation
-        // Pane
-        if (get_object_vars($this->pane->pane)) {
-            $chartJS .= "        pane: " . json_encode($this->pane->pane) . ",\n";
-        }
 
         // PlotOptions
         if (get_object_vars($this->plotOptions->plotOptions)) {
@@ -83,6 +73,11 @@ class Highstock extends AbstractChart implements ChartInterface
                     false,
                     array('enableJsonExprFinder' => true)) . ",\n";
         }
+
+        // RangeSelector
+        $chartJS .= $this->renderWithJavascriptCallback($this->rangeSelector->rangeSelector, "rangeSelector");
+
+        // Scrollbar
 
         // Series
         if (!empty($this->series)) {
@@ -96,8 +91,6 @@ class Highstock extends AbstractChart implements ChartInterface
         if (get_object_vars($this->subtitle->subtitle)) {
             $chartJS .= "        subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
         }
-
-        // Symbols
 
         // Title
         if (get_object_vars($this->title->title)) {

@@ -15,7 +15,7 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
         $this->credits = $this->chart->credits;
     }
 
-    public function testCredits()
+    public function testEnabled()
     {
         $this->credits->enabled(true);
         $this->assertTrue($this->credits->enabled);
