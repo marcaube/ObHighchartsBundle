@@ -19,11 +19,11 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
     {
         $this->credits->enabled(true);
         $this->assertTrue($this->credits->enabled);
-        $this->assertRegExp('/\"enabled\":\s?true/', $this->chart->render());
+        $this->assertRegExp('/"enabled":true/', $this->chart->render());
 
         $this->credits->enabled(false);
         $this->assertFalse($this->credits->enabled);
-        $this->assertRegExp('/\"enabled\":\s?false/', $this->chart->render());
+        $this->assertRegExp('/"enabled":false/', $this->chart->render());
     }
 
     public function testHref()
@@ -31,7 +31,7 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
         $link = "http://www.highcharts.com";
         $this->credits->href($link);
         $this->assertEquals($link, $this->credits->href);
-//        $this->assertRegExp('/\"href\":\s?\"http:\/\/www\.highcharts\.com\"/', $this->chart->render());
+//        $this->assertRegExp('/"href":"http:\/\/www\.highcharts\.com"/', $this->chart->render());
     }
 
     public function testPosition()
@@ -45,7 +45,7 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
 
         $this->credits->position($position);
         $this->assertEquals($this->credits->position, $position);
-        $this->assertRegExp('/\"position\":{\"align\":\"right\",\"x\":-10,\"verticalAlign\":\"bottom\",\"y\":-5}/', $this->chart->render());
+        $this->assertRegExp('/"position":{"align":"right","x":-10,"verticalAlign":"bottom","y":-5}/', $this->chart->render());
     }
 
     public function testStyle()
@@ -58,7 +58,7 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
 
         $this->credits->style($style);
         $this->assertEquals($style, $this->credits->style);
-        $this->assertRegExp('/\"style\":{\"cursor\":\"pointer\",\"color\":\"#909090\",\"fontSize\":\"10px\"}/', $this->chart->render());
+        $this->assertRegExp('/"style":{"cursor":"pointer","color":"#909090","fontSize":"10px"}/', $this->chart->render());
     }
 
     public function testText()
@@ -66,6 +66,6 @@ class CreditsTest extends \PHPUnit_Framework_TestCase
         $text = "Highcharts.com";
         $this->credits->text($text);
         $this->assertEquals($text, $this->credits->text);
-        $this->assertRegExp('/\"text\":\"Highcharts.com\"/', $this->chart->render());
+        $this->assertRegExp('/"text":"Highcharts.com"/', $this->chart->render());
     }
 }
