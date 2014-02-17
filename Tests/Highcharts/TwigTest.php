@@ -24,19 +24,19 @@ class TwigTest extends \PHPUnit_Framework_TestCase
 
         // render with jquery
         $this->assertRegExp(
-            '/\$\(function\(\)\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            '/\$\(function\s?\(\)\s?\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
             $extension->chart($chart)
         );
 
         // render with jquery explicitly
         $this->assertRegExp(
-            '/\$\(function\(\)\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            '/\$\(function\s?\(\)\s?\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
             $extension->chart($chart, 'jquery')
         );
 
         // render with mootools
         $this->assertRegExp(
-            '/window.addEvent\(\'domready\', function\(\) \{\r?\n?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            '/window.addEvent\(\'domready\', function\s?\(\)\s?\{\r?\n?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
             $extension->chart($chart, 'mootools')
         );
     }

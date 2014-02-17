@@ -101,10 +101,10 @@ class TooltipTest extends \PHPUnit_Framework_TestCase
     {
         $chart = new Highchart();
 
-        $func = new Expr('function() { return 1; }');
+        $func = new Expr('function () { return 1; }');
 
         $chart->tooltip->formatter($func);
-        $this->assertRegExp('/tooltip: \{"formatter":function\(\) \{ return 1; \}\}/', $chart->render());
+        $this->assertRegExp('/tooltip: \{"formatter":function\s?\(\)\s?\{ return 1; \}\}/', $chart->render());
     }
 
     /**

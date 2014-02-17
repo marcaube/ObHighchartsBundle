@@ -2,8 +2,6 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
-use Zend\Json\Json;
-
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
@@ -21,9 +19,9 @@ class Highchart extends AbstractChart implements ChartInterface
 
         // jQuery or MooTools
         if ($engine == 'mootools') {
-            $chartJS = 'window.addEvent(\'domready\', function() {';
+            $chartJS = 'window.addEvent(\'domready\', function () {';
         } elseif ($engine == 'jquery') {
-            $chartJS = "$(function(){";
+            $chartJS = "$(function () {";
         }
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
