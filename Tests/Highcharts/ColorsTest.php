@@ -1,6 +1,6 @@
 <?php
 
-namespace Ob\HighchartsBundle\Tests;
+namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
 
