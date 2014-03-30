@@ -11,17 +11,19 @@ DRY out your chart code by writing it all in PHP!
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/quality-score.png?s=a22d41fd17b944f8275e92c6d5aba27aca2ff18d)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
 [![Code Coverage](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/coverage.png?s=3d779351f7ef378fe0f6679809c90c17ad6f11b4)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
 
+
 ## Content
-* License
-* The Why
-* How to get started / Installation
+
+* [License](#license)
+* [How to get started / Installation](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#how-to-get-started)
 * Usage
-    * Make a basic line-chart
-    * Use mootools instead of jQuery
-    * Use js anonymous functions
+    * [Make a basic line-chart](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#basic-line-chart)
+    * [Use mootools instead of jQuery](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#use-highcharts-with-mootools)
+    * [Use js anonymous functions](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#use-a-javascript-anonymous-function)
 * Cookbook
-    * Pie chart with legend (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
-    * Make a Multi-axes plot (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
+    * [Pie chart with legend](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#pie-chart-with-legend) (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
+    * [Make a Multi-axes plot](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#multi-axes-plot) (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
+
 
 ## License
 ObHighchartsBundle is released under the MIT License. See the bundled [LICENSE](https://github.com/marcaube/ObHighchartsBundle/blob/master/LICENSE)
@@ -32,17 +34,12 @@ Please note that the Highcharts JS library bundled with the project is **not** f
 for details on pricing.
 
 
-## Why ?
-
-Because I grew tired of defining data series in php and then doing the exact same thing with a different syntax in 
-javascript to display the graph. I needed something to do the heavy lifting for me and take care of the boilerplate 
-code.
-
 ## How to get started
 
 ### Installation
 
 1. Add the following to your `composer.json` file
+
    ```json
        "require": {
            ...
@@ -66,6 +63,12 @@ code.
                ...
            );
        ...
+   ```
+   
+4. Install the static assets
+
+   ```bash
+   php app/console assets:install --symlink web
    ```
 
 ## Usage
@@ -138,6 +141,7 @@ argument of the twig extension like this
 ### Use highcharts without a jquery or mootools wrapper
 It is also possible to render your highcharts code without a jquery or mootools wrapper. This is useful when you want
 control how and when the chart is loaded or when integrating with existing code.
+
 ``` html
 <script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
 <script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
