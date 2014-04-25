@@ -15,18 +15,18 @@ DRY out your chart code by writing it all in PHP!
 ## Content
 
 * [License](#license)
-* [How to get started / Installation](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#how-to-get-started)
+* [How to get started / Installation](#how-to-get-started)
 * Usage
-    * [Make a basic line-chart](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#basic-line-chart)
-    * [Use mootools instead of jQuery](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#use-highcharts-with-mootools)
-    * [Use js anonymous functions](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#use-a-javascript-anonymous-function)
+    * [Make a basic line-chart](#basic-line-chart)
+    * [Use mootools instead of jQuery](#use-highcharts-with-mootools)
+    * [Use js anonymous functions](#use-a-javascript-anonymous-function)
 * Cookbook
-    * [Pie chart with legend](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#pie-chart-with-legend) (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
-    * [Make a Multi-axes plot](https://github.com/marcaube/ObHighchartsBundle/edit/master/README.md#multi-axes-plot) (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
+    * [Pie chart with legend](#pie-chart-with-legend) (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
+    * [Make a Multi-axes plot](#multi-axes-plot) (like [highcharts.com/demo/combo-multi-axes](http://www.highcharts.com/demo/combo-multi-axes))
 
 
 ## License
-ObHighchartsBundle is released under the MIT License. See the bundled [LICENSE](https://github.com/marcaube/ObHighchartsBundle/blob/master/LICENSE)
+ObHighchartsBundle is released under the MIT License. See the bundled [LICENSE](LICENSE)
 file for details.
 
 Please note that the Highcharts JS library bundled with the project is **not** free for commercial use, see their
