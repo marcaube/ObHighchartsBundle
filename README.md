@@ -19,6 +19,7 @@ DRY out your chart code by writing it all in PHP!
 * Usage
     * [Make a basic line-chart](#basic-line-chart)
     * [Use mootools instead of jQuery](#use-highcharts-with-mootools)
+    * [Use without a jQuery/Mootools wrapper](#use-highcharts-without-a-jquery-or-mootools-wrapper)
     * [Use js anonymous functions](#use-a-javascript-anonymous-function)
 * Cookbook
     * [Pie chart with legend](#pie-chart-with-legend) (like [highcharts.com/demo/pie-legend](http://www.highcharts.com/demo/pie-legend))
