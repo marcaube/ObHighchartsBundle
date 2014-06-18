@@ -20,5 +20,10 @@
             "Ob\\HighchartsBundle": ""
         }
     },
-    "target-dir": "Ob/HighchartsBundle"
+    "target-dir": "Ob/HighchartsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }
