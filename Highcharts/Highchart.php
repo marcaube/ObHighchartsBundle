@@ -23,24 +23,6 @@ class Highchart extends AbstractChart implements ChartInterface
         } elseif ($engine == 'jquery') {
             $chartJS = "$(function () {";
         }
-        
-        // Highcharts.setOptions
-        if (get_object_vars($this->global->global) || get_object_vars($this->lang->lang)) {
-            $chartJS .= "\n    Highcharts.setOptions({";
-
-            // Global
-            if (get_object_vars($this->global->global)) {
-                $chartJS .= "\n        global: " . json_encode($this->global->global) . ",\n";
-            }
-
-            // Lang
-            if (get_object_vars($this->lang->lang)) {
-                $chartJS .= "\n        lang: " . json_encode($this->lang->lang) . ",\n";
-            }
-
-            $chartJS .= "    });\n";
-        }
-        
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
@@ -59,7 +41,13 @@ class Highchart extends AbstractChart implements ChartInterface
         // Exporting
         $chartJS .= $this->renderWithJavascriptCallback($this->exporting->exporting, "exporting");
 
+        // Global
+        if (get_object_vars($this->global->global)) {
+            $chartJS .= "        global: " . json_encode($this->global->global) . ",\n";
+        }
+
         // Labels
+        // Lang
 
         // Legend
         $chartJS .= $this->renderWithJavascriptCallback($this->legend->legend, "legend");
