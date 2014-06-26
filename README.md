@@ -125,7 +125,7 @@ argument of the twig extension like this
 ``` html
 <!-- Load MooTools from Google's CDN if needed and the highcharts adapter -->
 <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js" type="text/javascript"></script>
-<script src="//code.highcharts.com/4.0.1/adapters/mootools-adapter.js" type="text/javascript"></script>
+<script src="//code.highcharts.com/3.0.10/adapters/mootools-adapter.js" type="text/javascript"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/highcharts.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/modules/exporting.js"></script>
