@@ -27,6 +27,7 @@ DRY out your chart code by writing it all in PHP!
 
 
 ## License
+
 ObHighchartsBundle is released under the MIT License. See the bundled [LICENSE](LICENSE)
 file for details.
 
@@ -44,7 +45,7 @@ for details on pricing.
    ```json
        "require": {
            ...
-           "ob/highcharts-bundle": "1.*"
+           "ob/highcharts-bundle": "1.1.*"
            ...
        }
    ```
@@ -65,12 +66,7 @@ for details on pricing.
            );
        ...
    ```
-   
-4. Install the static assets
 
-   ```bash
-   php app/console assets:install --symlink web
-   ```
 
 ## Usage
 
@@ -80,6 +76,7 @@ In your controller ...
 
 ``` php
     <?php
+
     use Ob\HighchartsBundle\Highcharts\Highchart;
 
     // ...
@@ -109,8 +106,8 @@ In your template ...
 <!-- Load jQuery from Google's CDN if needed -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/highcharts.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/modules/exporting.js"></script>
 <script type="text/javascript">
     {{ chart(chart) }}
 </script>
@@ -128,10 +125,10 @@ argument of the twig extension like this
 ``` html
 <!-- Load MooTools from Google's CDN if needed and the highcharts adapter -->
 <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js" type="text/javascript"></script>
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/adapters/mootools-adapter.js') }}" type="text/javascript"></script>
+<script src="//code.highcharts.com/4.0.1/adapters/mootools-adapter.js" type="text/javascript"></script>
 
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/highcharts.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/modules/exporting.js"></script>
 <script type="text/javascript">
     {{ chart(chart, 'mootools') }}
 </script>
@@ -144,8 +141,8 @@ It is also possible to render your highcharts code without a jquery or mootools 
 control how and when the chart is loaded or when integrating with existing code.
 
 ``` html
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('bundles/obhighcharts/js/highcharts/modules/exporting.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/highcharts.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.0.1/modules/exporting.js"></script>
 <script type="text/javascript">
     myLib.chartLoad(function(data){
         {{ chart(chart, false) }}
