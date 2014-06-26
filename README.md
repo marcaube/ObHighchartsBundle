@@ -10,6 +10,7 @@ DRY out your chart code by writing it all in PHP!
 [![Total Downloads](https://poser.pugx.org/ob/highcharts-bundle/downloads.png)](https://packagist.org/packages/ob/highcharts-bundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/quality-score.png?s=a22d41fd17b944f8275e92c6d5aba27aca2ff18d)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
 [![Code Coverage](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/coverage.png?s=3d779351f7ef378fe0f6679809c90c17ad6f11b4)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/89bc39ac-8cd3-4613-aa93-5e57b0388592/mini.png)](https://insight.sensiolabs.com/projects/89bc39ac-8cd3-4613-aa93-5e57b0388592)
 
 
 ## Content
