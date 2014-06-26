@@ -5,6 +5,9 @@ namespace Ob\HighchartsBundle\Highcharts;
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
+ *
+ * @method Highchart colors(array $colors)
+ * @method Highchart series(array $series)
  */
 class Highchart extends AbstractChart implements ChartInterface
 {

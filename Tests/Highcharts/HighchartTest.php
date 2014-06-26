@@ -29,7 +29,7 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
         $chart = new Highchart();
         $this->assertRegExp(
             '/var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);/',
-            $chart->render(false)
+            $chart->render(null)
         );
     }
 
