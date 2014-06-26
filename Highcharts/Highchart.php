@@ -16,35 +16,23 @@ class Highchart extends AbstractChart implements ChartInterface
     public function render($engine = 'jquery')
     {
         $chartJS = "";
-
-        // jQuery or MooTools
-        if ($engine == 'mootools') {
-            $chartJS = 'window.addEvent(\'domready\', function () {';
-        } elseif ($engine == 'jquery') {
-            $chartJS = "$(function () {";
-        }
+        $chartJS .= $this->renderEngine($engine);
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
         // Chart Option
         $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");
 
         // Colors
-        if (!empty($this->colors)) {
-            $chartJS .= "        colors: " . json_encode($this->colors) . ",\n";
-        }
+        $chartJS .= $this->renderColors();
 
         // Credits
-        if (get_object_vars($this->credits->credits)) {
-            $chartJS .= "        credits: " . json_encode($this->credits->credits) . ",\n";
-        }
+        $chartJS .= $this->renderCredits();
 
         // Exporting
         $chartJS .= $this->renderWithJavascriptCallback($this->exporting->exporting, "exporting");
 
         // Global
-        if (get_object_vars($this->global->global)) {
-            $chartJS .= "        global: " . json_encode($this->global->global) . ",\n";
-        }
+        $chartJS .= $this->renderGlobal();
 
         // Labels
         // Lang
@@ -55,9 +43,7 @@ class Highchart extends AbstractChart implements ChartInterface
         // Loading
         // Navigation
         // Pane
-        if (get_object_vars($this->pane->pane)) {
-            $chartJS .= "        pane: " . json_encode($this->pane->pane) . ",\n";
-        }
+        $chartJS .= $this->renderPane();
 
         // PlotOptions
         $chartJS .= $this->renderWithJavascriptCallback($this->plotOptions->plotOptions, "plotOptions");
@@ -66,33 +52,21 @@ class Highchart extends AbstractChart implements ChartInterface
         $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
 
         // Subtitle
-        if (get_object_vars($this->subtitle->subtitle)) {
-            $chartJS .= "        subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
-        }
+        $chartJS .= $this->renderSubtitle();
 
         // Symbols
 
         // Title
-        if (get_object_vars($this->title->title)) {
-            $chartJS .= "        title: " . json_encode($this->title->title) . ",\n";
-        }
+        $chartJS .= $this->renderTitle();
 
         // Tooltip
         $chartJS .= $this->renderWithJavascriptCallback($this->tooltip->tooltip, "tooltip");
 
         // xAxis
-        if (gettype($this->xAxis) === 'array') {
-            $chartJS .= $this->renderWithJavascriptCallback($this->xAxis, "xAxis");
-        } elseif (gettype($this->xAxis) === 'object') {
-            $chartJS .= $this->renderWithJavascriptCallback($this->xAxis->xAxis, "xAxis");
-        }
+        $chartJS .= $this->renderXAxis();
 
         // yAxis
-        if (gettype($this->yAxis) === 'array') {
-            $chartJS .= $this->renderWithJavascriptCallback($this->yAxis, "yAxis");
-        } elseif (gettype($this->yAxis) === 'object') {
-            $chartJS .= $this->renderWithJavascriptCallback($this->yAxis->yAxis, "yAxis");
-        }
+        $chartJS .= $this->renderYAxis();
 
         // trim last trailing comma and close parenthesis
         $chartJS = rtrim($chartJS, ",\n") . "\n    });\n";
@@ -102,5 +76,119 @@ class Highchart extends AbstractChart implements ChartInterface
         }
 
         return trim($chartJS);
+    }
+
+    /**
+     * @param string $engine
+     *
+     * @return string
+     */
+    private function renderEngine($engine)
+    {
+        if ($engine == 'mootools') {
+            return 'window.addEvent(\'domready\', function () {';
+        } elseif ($engine == 'jquery') {
+            return "$(function () {";
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function renderColors()
+    {
+        if (!empty($this->colors)) {
+            return "colors: " . json_encode($this->colors) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderCredits()
+    {
+        if (get_object_vars($this->credits->credits)) {
+            return "credits: " . json_encode($this->credits->credits) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderGlobal()
+    {
+        if (get_object_vars($this->global->global)) {
+            return "global: " . json_encode($this->global->global) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderPane()
+    {
+        if (get_object_vars($this->pane->pane)) {
+            return "pane: " . json_encode($this->pane->pane) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderSubtitle()
+    {
+        if (get_object_vars($this->subtitle->subtitle)) {
+            return "subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderTitle()
+    {
+        if (get_object_vars($this->title->title)) {
+            return "title: " . json_encode($this->title->title) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderXAxis()
+    {
+        if (gettype($this->xAxis) === 'array') {
+            return $this->renderWithJavascriptCallback($this->xAxis, "xAxis");
+        } elseif (gettype($this->xAxis) === 'object') {
+            return $this->renderWithJavascriptCallback($this->xAxis->xAxis, "xAxis");
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderYAxis()
+    {
+        if (gettype($this->yAxis) === 'array') {
+            return $this->renderWithJavascriptCallback($this->yAxis, "yAxis");
+        } elseif (gettype($this->yAxis) === 'object') {
+            return $this->renderWithJavascriptCallback($this->yAxis->yAxis, "yAxis");
+        }
+
+        return "";
     }
 }
