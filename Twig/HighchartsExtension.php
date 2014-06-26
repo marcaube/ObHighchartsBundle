@@ -8,7 +8,7 @@ class HighchartsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'chart' => new \Twig_Function_Method($this, 'chart', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('chart', array($this, 'chart'), array('is_safe' => array('html'))),
         );
     }
 

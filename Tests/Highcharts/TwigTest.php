@@ -20,8 +20,6 @@ class TwigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('highcharts_extension', $extension->getName());
 
-        $this->assertArrayHasKey('chart', $extension->getFunctions());
-
         // render with jquery
         $this->assertRegExp(
             '/\$\(function\s?\(\)\s?\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
