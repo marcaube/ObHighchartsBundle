@@ -39,6 +39,7 @@ class Highchart extends AbstractChart implements ChartInterface
 
         // Labels
         // Lang
+        $chartJS .= $this->renderLang();
 
         // Legend
         $chartJS .= $this->renderWithJavascriptCallback($this->legend->legend, "legend");
@@ -126,6 +127,18 @@ class Highchart extends AbstractChart implements ChartInterface
     {
         if (get_object_vars($this->global->global)) {
             return "global: " . json_encode($this->global->global) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderLang()
+    {
+        if (get_object_vars($this->lang->lang)) {
+            return "lang: " . json_encode($this->lang->lang) . ",\n";
         }
 
         return "";
