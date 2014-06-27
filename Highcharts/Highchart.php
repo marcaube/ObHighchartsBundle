@@ -20,9 +20,10 @@ class Highchart extends AbstractChart implements ChartInterface
     {
         $chartJS = "";
         $chartJS .= $this->renderEngine($engine);
+        $chartJS .= $this->renderOptions();
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
 
-        // Chart Option
+        // Chart
         $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");
 
         // Colors
@@ -34,12 +35,7 @@ class Highchart extends AbstractChart implements ChartInterface
         // Exporting
         $chartJS .= $this->renderWithJavascriptCallback($this->exporting->exporting, "exporting");
 
-        // Global
-        $chartJS .= $this->renderGlobal();
-
         // Labels
-        // Lang
-        $chartJS .= $this->renderLang();
 
         // Legend
         $chartJS .= $this->renderWithJavascriptCallback($this->legend->legend, "legend");
@@ -94,6 +90,23 @@ class Highchart extends AbstractChart implements ChartInterface
         } elseif ($engine == 'jquery') {
             return "$(function () {";
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function renderOptions()
+    {
+        $result = "";
+
+        if (get_object_vars($this->global->global) || get_object_vars($this->lang->lang)) {
+            $result .= "\n    Highcharts.setOptions({";
+            $result .= $this->renderGlobal();
+            $result .= $this->renderLang();
+            $result .= "    });\n";
+        }
+
+        return $result;
     }
 
     /**

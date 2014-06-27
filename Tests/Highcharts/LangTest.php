@@ -29,10 +29,10 @@ class LangTest extends \PHPUnit_Framework_TestCase
     public function testShortMonths()
     {
         $chart = new Highchart();
-        $chart->lang->months(array('Jan', 'Fev', 'Mars', 'Avril', 'Mai', 'Juin',  'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'));
+        $chart->lang->shortMonths(array('Jan', 'Fev', 'Mars', 'Avril', 'Mai', 'Juin',  'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'));
 
         $this->assertRegExp(
-            '/lang: \{"months":\["Jan","Fev","Mars","Avril","Mai","Juin","Juil","Aout","Sept","Oct","Nov","Dec"\]\}/',
+            '/lang: \{"shortMonths":\["Jan","Fev","Mars","Avril","Mai","Juin","Juil","Aout","Sept","Oct","Nov","Dec"\]\}/',
             $chart->render()
         );
     }
