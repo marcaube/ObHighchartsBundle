@@ -80,7 +80,7 @@ control how and when the chart is loaded or when integrating with existing code.
 <script type="text/javascript">
     myLib.chartLoad(function(data){
         {{ chart(chart, false) }}
-    }
+    });
 </script>
 
 <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
