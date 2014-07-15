@@ -19,6 +19,7 @@ abstract class AbstractChart
     public $rangeSelector;
     public $point;
     public $series;
+    public $drilldown;
     public $subtitle;
     public $symbols;
     public $title;
@@ -33,7 +34,7 @@ abstract class AbstractChart
     {
         $chartOptions = array('chart', 'credits', 'global', 'labels', 'lang', 'legend', 'loading', 'plotOptions',
             'rangeSelector', 'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting',
-            'navigation');
+            'navigation', 'drilldown');
 
         foreach ($chartOptions as $option) {
             $this->initChartOption($option);
