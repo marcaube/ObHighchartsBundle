@@ -18,61 +18,31 @@ class Highstock extends AbstractChart implements ChartInterface
     public function render($engine = 'jquery')
     {
         $chartJS = "";
-
-        // jQuery or MooTools
-        if ($engine == 'mootools') {
-            $chartJS = 'window.addEvent(\'domready\', function () {';
-        } elseif ($engine == 'jquery') {
-            $chartJS = "$(function () {";
-        }
+        $chartJS .= $this->renderEngine($engine);
         $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.StockChart({\n";
 
         // Chart Option
-        if (get_object_vars($this->chart->chart)) {
-            $chartJS .= "        chart: " .
-                Json::encode($this->chart->chart,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");
 
         // Colors
-        if (!empty($this->colors)) {
-            $chartJS .= "        colors: " . json_encode($this->colors) . ",\n";
-        }
+        $chartJS .= $this->renderColors();
 
         // Credits
-        if (get_object_vars($this->credits->credits)) {
-            $chartJS .= "        credits: " . json_encode($this->credits->credits) . ",\n";
-        }
+        $chartJS .= $this->renderCredits();
 
         // Exporting
-        if (get_object_vars($this->exporting->exporting)) {
-            $chartJS .= "        exporting: " .
-                Json::encode($this->exporting->exporting,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->exporting->exporting, "exporting");
 
         // Labels
 
         // Legend
-        if (get_object_vars($this->legend->legend)) {
-            $chartJS .= "        legend: " .
-                Json::encode($this->legend->legend,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->legend->legend, "legend");
 
         // Loading
         // Navigation
 
         // PlotOptions
-        if (get_object_vars($this->plotOptions->plotOptions)) {
-            $chartJS .= "        plotOptions: " .
-                Json::encode($this->plotOptions->plotOptions,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->plotOptions->plotOptions, "plotOptions");
 
         // RangeSelector
         $chartJS .= $this->renderWithJavascriptCallback($this->rangeSelector->rangeSelector, "rangeSelector");
@@ -80,64 +50,22 @@ class Highstock extends AbstractChart implements ChartInterface
         // Scrollbar
 
         // Series
-        if (!empty($this->series)) {
-            $chartJS .= "        series: " .
-                Json::encode($this->series[0],
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
 
         // Subtitle
-        if (get_object_vars($this->subtitle->subtitle)) {
-            $chartJS .= "        subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
-        }
+        $chartJS .= $this->renderSubtitle();
 
         // Title
-        if (get_object_vars($this->title->title)) {
-            $chartJS .= "        title: " . json_encode($this->title->title) . ",\n";
-        }
+        $chartJS .= $this->renderTitle();
 
         // Tooltip
-        if (get_object_vars($this->tooltip->tooltip)) {
-            $chartJS .= "        tooltip: " .
-                Json::encode($this->tooltip->tooltip,
-                    false,
-                    array('enableJsonExprFinder' => true)) . ",\n";
-        }
+        $chartJS .= $this->renderWithJavascriptCallback($this->tooltip->tooltip, "tooltip");
 
         // xAxis
-        if (gettype($this->xAxis) === 'array') {
-            if (!empty($this->xAxis)) {
-                $chartJS .= "        xAxis: " .
-                    Json::encode($this->xAxis[0],
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
-        } elseif (gettype($this->xAxis) === 'object') {
-            if (get_object_vars($this->xAxis->xAxis)) {
-                $chartJS .= "        xAxis: " .
-                    Json::encode($this->xAxis->xAxis,
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
-        }
+        $chartJS .= $this->renderXAxis();
 
         // yAxis
-        if (gettype($this->yAxis) === 'array') {
-            if (!empty($this->yAxis)) {
-                $chartJS .= "        yAxis: " .
-                    Json::encode($this->yAxis[0],
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
-        } elseif (gettype($this->yAxis) === 'object') {
-            if (get_object_vars($this->yAxis->yAxis)) {
-                $chartJS .= "        yAxis: " .
-                    Json::encode($this->yAxis->yAxis,
-                        false,
-                        array('enableJsonExprFinder' => true)) . ",\n";
-            }
-        }
+        $chartJS .= $this->renderYAxis();
 
         // trim last trailing comma and close parenthesis
         $chartJS = rtrim($chartJS, ",\n") . "\n    });\n";

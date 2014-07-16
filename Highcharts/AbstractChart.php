@@ -132,4 +132,94 @@ abstract class AbstractChart
 
         return $result;
     }
+
+    /**
+     * @param string $engine
+     *
+     * @return string
+     */
+    protected function renderEngine($engine)
+    {
+        if ($engine == 'mootools') {
+            return 'window.addEvent(\'domready\', function () {';
+        } elseif ($engine == 'jquery') {
+            return "$(function () {";
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderColors()
+    {
+        if (!empty($this->colors)) {
+            return "colors: " . json_encode($this->colors) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderCredits()
+    {
+        if (get_object_vars($this->credits->credits)) {
+            return "credits: " . json_encode($this->credits->credits) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderSubtitle()
+    {
+        if (get_object_vars($this->subtitle->subtitle)) {
+            return "subtitle: " . json_encode($this->subtitle->subtitle) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderTitle()
+    {
+        if (get_object_vars($this->title->title)) {
+            return "title: " . json_encode($this->title->title) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderXAxis()
+    {
+        if (gettype($this->xAxis) === 'array') {
+            return $this->renderWithJavascriptCallback($this->xAxis, "xAxis");
+        } elseif (gettype($this->xAxis) === 'object') {
+            return $this->renderWithJavascriptCallback($this->xAxis->xAxis, "xAxis");
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderYAxis()
+    {
+        if (gettype($this->yAxis) === 'array') {
+            return $this->renderWithJavascriptCallback($this->yAxis, "yAxis");
+        } elseif (gettype($this->yAxis) === 'object') {
+            return $this->renderWithJavascriptCallback($this->yAxis->yAxis, "yAxis");
+        }
+
+        return "";
+    }
 }
