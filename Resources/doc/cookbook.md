@@ -7,7 +7,7 @@ This is a simple recipe to re-create the pie-chart demo with legend at [highchar
 
 ```php
 $ob = new Highchart();
-$ob->chart->renderTo('linechart');
+$ob->chart->renderTo('piechart');
 $ob->title->text('Browser market shares at a specific website in 2010');
 $ob->plotOptions->pie(array(
     'allowPointSelect'  => true,
@@ -26,6 +26,78 @@ $data = array(
 $ob->series(array(array('type' => 'pie','name' => 'Browser share', 'data' => $data)));
 ```
 
+## Pie chart with Drilldown
+
+This is a simple recipe to re-create a chart similar to the drilldown pie-chart demo at [highcharts.com/demo/pie-drilldown](http://www.highcharts.com/demo/pie-drilldown)
+
+```php
+$ob = new Highchart();
+$ob->chart->renderTo('container');
+$ob->chart->type('pie');
+$ob->title->text('Browser market shares. November, 2013.');
+$ob->plotOptions->series(
+    array(
+        'dataLabels' => array(
+            'enabled' => true,
+            'format' => '{point.name}: {point.y:.1f}%'
+        )
+    )
+);
+
+$ob->tooltip->headerFormat('<span style="font-size:11px">{series.name}</span><br>');
+$ob->tooltip->pointFormat('<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>');
+
+$data = array(
+    array(
+        'name' => 'Chrome',
+        'y' => 18.73,
+        'drilldown' => 'Chrome',
+        'visible' => true
+    ),
+    array(
+        'name' => 'Microsoft Internet Explorer',
+        'y' => 53.61,
+        'drilldown' => 'Microsoft Internet Explorer',
+        'visible' => true
+    ),
+    array('Firefox', 45.0),
+    array('Opera', 1.5)
+);
+$ob->series(
+    array(
+        array(
+            'name' => 'Browser share',
+            'colorByPoint' => true,
+            'data' => $data
+        )
+    )
+);
+
+$drilldown = array(
+    array(
+        'name' => 'Microsoft Internet Explorer',
+        'id' => 'Microsoft Internet Explorer',
+        'data' => array(
+            array("v8.0", 26.61),
+            array("v9.0", 16.96),
+            array("v6.0", 6.4),
+            array("v7.0", 3.55),
+            array("v8.0", 0.09)
+        )
+    ),
+    array(
+        'name' => 'Chrome',
+        'id' => 'Chrome',
+        'data' => array(
+            array("v19.0", 7.73),
+            array("v17.0", 1.13),
+            array("v16.0", 0.45),
+            array("v18.0", 0.26)
+        )
+    ),
+);
+$ob->drilldown->series($drilldown);
+```
 
 ## Multi-axes plot
 
