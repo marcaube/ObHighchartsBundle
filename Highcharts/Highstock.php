@@ -2,11 +2,12 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
-use Zend\Json\Json;
-
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/
+ *
+ * @method Highstock colors(array $colors)
+ * @method Highstock series(array $series)
  */
 class Highstock extends AbstractChart implements ChartInterface
 {
