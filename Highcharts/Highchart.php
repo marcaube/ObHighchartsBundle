@@ -51,6 +51,9 @@ class Highchart extends AbstractChart implements ChartInterface
         // Series
         $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
 
+        // Drilldown
+        $chartJS .= $this->renderDrilldown();
+
         // Subtitle
         $chartJS .= $this->renderSubtitle();
 
@@ -164,6 +167,18 @@ class Highchart extends AbstractChart implements ChartInterface
     {
         if (get_object_vars($this->pane->pane)) {
             return "pane: " . json_encode($this->pane->pane) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    private function renderDrilldown()
+    {
+        if (get_object_vars($this->drilldown->drilldown)) {
+            return "drilldown: " . json_encode($this->drilldown->drilldown) . ",\n";
         }
 
         return "";
