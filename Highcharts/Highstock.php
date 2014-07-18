@@ -78,45 +78,4 @@ class Highstock extends AbstractChart implements ChartInterface
 
         return trim($chartJS);
     }
-    
-    /**
-     * @return string
-     */
-    private function renderOptions()
-    {
-        $result = "";
-
-        if (get_object_vars($this->global->global) || get_object_vars($this->lang->lang)) {
-            $result .= "\n    Highcharts.setOptions({";
-            $result .= $this->renderGlobal();
-            $result .= $this->renderLang();
-            $result .= "    });\n";
-        }
-
-        return $result;
-    }
-    
-    /**
-     * @return string
-     */
-    private function renderGlobal()
-    {
-        if (get_object_vars($this->global->global)) {
-            return "global: " . json_encode($this->global->global) . ",\n";
-        }
-
-        return "";
-    }
-
-    /**
-     * @return string
-     */
-    private function renderLang()
-    {
-        if (get_object_vars($this->lang->lang)) {
-            return "lang: " . json_encode($this->lang->lang) . ",\n";
-        }
-
-        return "";
-    }
 }
