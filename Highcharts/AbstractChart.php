@@ -222,4 +222,45 @@ abstract class AbstractChart
 
         return "";
     }
+    
+    /**
+     * @return string
+     */
+    protected function renderOptions()
+    {
+        $result = "";
+
+        if (get_object_vars($this->global->global) || get_object_vars($this->lang->lang)) {
+            $result .= "\n    Highcharts.setOptions({";
+            $result .= $this->renderGlobal();
+            $result .= $this->renderLang();
+            $result .= "    });\n";
+        }
+
+        return $result;
+    }
+    
+    /**
+     * @return string
+     */
+    protected function renderGlobal()
+    {
+        if (get_object_vars($this->global->global)) {
+            return "global: " . json_encode($this->global->global) . ",\n";
+        }
+
+        return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderLang()
+    {
+        if (get_object_vars($this->lang->lang)) {
+            return "lang: " . json_encode($this->lang->lang) . ",\n";
+        }
+
+        return "";
+    }
 }
