@@ -12,11 +12,9 @@ matrix:
         - php: hhvm
 
 env:
-  - SYMFONY_VERSION=origin/2.0
-  - SYMFONY_VERSION=origin/2.1
-  - SYMFONY_VERSION=origin/2.2
   - SYMFONY_VERSION=origin/2.3
   - SYMFONY_VERSION=origin/2.4
+  - SYMFONY_VERSION=origin/2.5
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
