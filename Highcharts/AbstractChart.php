@@ -29,12 +29,13 @@ abstract class AbstractChart
     public $exporting;
     public $navigation;
     public $pane;
+    public $scrollbar;
 
     public function __construct()
     {
         $chartOptions = array('chart', 'credits', 'global', 'labels', 'lang', 'legend', 'loading', 'plotOptions',
             'rangeSelector', 'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting',
-            'navigation', 'drilldown');
+            'navigation', 'drilldown', 'scrollbar');
 
         foreach ($chartOptions as $option) {
             $this->initChartOption($option);
@@ -262,5 +263,17 @@ abstract class AbstractChart
         }
 
         return "";
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderScrollbar()
+    {
+        if (get_object_vars($this->scrollbar->scrollbar)) {
+            return 'scrollbar: ' . json_encode($this->scrollbar->scrollbar) . ",\n";
+        }
+
+        return '';
     }
 }

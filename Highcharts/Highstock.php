@@ -50,6 +50,7 @@ class Highstock extends AbstractChart implements ChartInterface
         $chartJS .= $this->renderWithJavascriptCallback($this->rangeSelector->rangeSelector, "rangeSelector");
 
         // Scrollbar
+        $chartJS .= $this->renderScrollbar();
 
         // Series
         $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
