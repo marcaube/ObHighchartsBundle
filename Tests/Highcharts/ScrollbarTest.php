@@ -17,7 +17,7 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     /*
      * @var array
      */
-    private $usedOptions = [];
+    private $usedOptions = array();
 
     /**
      * Initialises the data
