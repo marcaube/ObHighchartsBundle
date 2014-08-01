@@ -51,6 +51,9 @@ class Highchart extends AbstractChart implements ChartInterface
         // Series
         $chartJS .= $this->renderWithJavascriptCallback($this->series, "series");
 
+        // Scrollbar
+        $chartJS .= $this->renderScrollbar();
+
         // Drilldown
         $chartJS .= $this->renderDrilldown();
 
