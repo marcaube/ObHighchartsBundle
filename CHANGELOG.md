@@ -1,6 +1,11 @@
 # Changelog
 
 
+### 1.2.x (???)
+
+* Update to PSR-4 autoloading
+
+
 ### 1.2.0  (2014-08-04)
 
 * Refactor deprecated Twig_Function_Method to Twig_SimpleFunction
