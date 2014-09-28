@@ -223,7 +223,7 @@ abstract class AbstractChart
 
         return "";
     }
-    
+
     /**
      * @return string
      */
@@ -240,7 +240,7 @@ abstract class AbstractChart
 
         return $result;
     }
-    
+
     /**
      * @return string
      */

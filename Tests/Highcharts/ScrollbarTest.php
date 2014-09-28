@@ -47,7 +47,7 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     public function testConfig()
     {
         $chart = new Highchart();
-        foreach($this->scrollbar as $key => $value) {
+        foreach ($this->scrollbar as $key => $value) {
             // Config randomization
             if(mt_rand(0, 5) === 0) continue;
 
