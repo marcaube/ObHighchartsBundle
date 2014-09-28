@@ -1,8 +1,6 @@
 inherit: true
 
 tools:
-    php_code_coverage:
-        test_command: phpunit
     php_code_sniffer: true
     php_cpd: true
     php_cs_fixer: true
@@ -11,6 +9,7 @@ tools:
     php_pdepend: true
     php_analyzer: true
     sensiolabs_security_checker: true
+    external_code_coverage: true
 
 before_commands:
     - "composer install --prefer-source"
