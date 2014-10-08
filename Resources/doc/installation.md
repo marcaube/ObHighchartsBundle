@@ -1,18 +1,8 @@
 # Installation
 
-1. Add the following to your `composer.json` file
+1. Run `composer require ob/highcharts-bundle`
 
-   ```json
-    "require": {
-        ...
-        "ob/highcharts-bundle": "1.1.*"
-        ...
-    }
-   ```
-
-2. Run `php composer.phar update "ob/highcharts-bundle"`
-
-3. Register the bundle in your `app/AppKernel.php`:
+2. Register the bundle in your `app/AppKernel.php`:
 
    ``` php
     <?php
