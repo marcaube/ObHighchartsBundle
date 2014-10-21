@@ -77,7 +77,7 @@ class Highchart extends AbstractChart implements ChartInterface
         // trim last trailing comma and close parenthesis
         $chartJS = rtrim($chartJS, ",\n") . "\n    });\n";
 
-        if ($engine != false) {
+        if ($engine !== false) {
             $chartJS .= "});\n";
         }
 
