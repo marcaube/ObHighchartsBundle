@@ -111,6 +111,7 @@ abstract class AbstractChart
         $result = "";
 
         if (!empty($chartOption)) {
+            // Zend\Json is used in place of json_encode to preserve JS anonymous functions
             $result .= $name . ": " . Json::encode($chartOption[0], false, array('enableJsonExprFinder' => true)) . ", \n";
         }
 
@@ -128,6 +129,7 @@ abstract class AbstractChart
         $result = "";
 
         if (get_object_vars($chartOption)) {
+            // Zend\Json is used in place of json_encode to preserve JS anonymous functions
             $result .= $name . ": " . Json::encode($chartOption, false, array('enableJsonExprFinder' => true)) . ",\n";
         }
 
