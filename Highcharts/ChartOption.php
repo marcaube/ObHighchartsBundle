@@ -45,4 +45,16 @@ class ChartOption
 
         return $value;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function __isset($name)
+    {
+        $option_name = $this->option_name;
+        
+        return isset($this->{$option_name}->{$name});
+    }
 }
