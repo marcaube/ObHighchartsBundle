@@ -10,6 +10,9 @@ php:
 matrix:
     allow_failures:
         - php: hhvm
+    include:
+        - php: 5.3
+          env: dependencies=lowest
 
 env:
     - SYMFONY_VERSION=2.3.*
@@ -19,6 +22,7 @@ env:
 before_script:
     - curl -s http://getcomposer.org/installer | php
     - php composer.phar --dev install
+    - if [ "$dependencies" = "lowest"]; then composer update --prefer-lowest --prefer-stable -n; fi;
 
 script:
     - phpunit --coverage-text --coverage-clover=coverage.clover
