@@ -22,4 +22,15 @@ class GlobalTest extends \PHPUnit_Framework_TestCase
         $chart->global->useUTC("false");
         $this->assertRegExp('/global: \{"useUTC":"false"\}/', $chart->render());
     }
+
+    /**
+     * noData option (string)
+     */
+    public function testLang()
+    {
+        $chart = new Highchart();
+
+        $chart->lang->noData("No data to display");
+        $this->assertRegExp('/"noData":"No data to display"/', $chart->render());
+    }
 }
