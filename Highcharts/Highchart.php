@@ -11,6 +11,14 @@ namespace Ob\HighchartsBundle\Highcharts;
  */
 class Highchart extends AbstractChart implements ChartInterface
 {
+    public $noData;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initChartOption('noData');
+    }
+
     /**
      * @param string $engine
      *
@@ -42,6 +50,10 @@ class Highchart extends AbstractChart implements ChartInterface
 
         // Loading
         // Navigation
+
+        // noData
+        $chartJS .= $this->renderWithJavascriptCallback($this->noData->noData, "noData");
+
         // Pane
         $chartJS .= $this->renderPane();
 
