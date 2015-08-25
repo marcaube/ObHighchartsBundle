@@ -37,8 +37,8 @@ In your template ...
 <!-- Load jQuery from Google's CDN if needed -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-<script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
-<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
+<script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+<script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
 <script type="text/javascript">
     {{ chart(chart) }}
 </script>
@@ -59,8 +59,8 @@ argument of the twig extension like this
 <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js" type="text/javascript"></script>
 <script src="//code.highcharts.com/3.0.10/adapters/mootools-adapter.js" type="text/javascript"></script>
 
-<script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
-<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
+<script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+<script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
 <script type="text/javascript">
     {{ chart(chart, 'mootools') }}
 </script>
@@ -75,8 +75,8 @@ It is also possible to render your highcharts code without a jquery or mootools 
 control how and when the chart is loaded or when integrating with existing code.
 
 ``` html
-<script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
-<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
+<script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
+<script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
 <script type="text/javascript">
     myLib.chartLoad(function(data){
         {{ chart(chart, false) }}
