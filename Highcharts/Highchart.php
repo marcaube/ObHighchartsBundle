@@ -56,6 +56,9 @@ class Highchart extends AbstractChart implements ChartInterface
 
         // Pane
         $chartJS .= $this->renderPane();
+        
+        // Lang
+        $chartJS .= $this->renderLang();
 
         // PlotOptions
         $chartJS .= $this->renderWithJavascriptCallback($this->plotOptions->plotOptions, "plotOptions");
