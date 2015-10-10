@@ -1,12 +1,19 @@
 # Changelog
 
 
-### 1.2.x (???)
+## [Unreleased]
+
+TBD
+
+
+### [1.3.0] - 2015-10-10
 
 * Update to PSR-4 autoloading
+* Add support for colorAxis
+* Add support for noData
 
 
-### 1.2.0  (2014-08-04)
+### [1.2.0] - 2014-08-04
 
 * Refactor deprecated Twig_Function_Method to Twig_SimpleFunction
 * Add support for lang
@@ -17,7 +24,7 @@
 * Add support for scrollbar
 
 
-### 1.1.0  (2014-06-26)
+### [1.1.0] - 2014-06-26
 
 This release fixes a security issue. You are encouraged to update to it as soon
 as possible. See http://framework.zend.com/security/advisory/ZF2014-01
@@ -32,7 +39,7 @@ as possible. See http://framework.zend.com/security/advisory/ZF2014-01
 * Remove bundled assets in favor of Highcharts' CDN (http://code.highcharts.com/)
 
 
-### 1.0.1  (2013-11-08)
+### [1.0.1] - 2013-11-08
 
 * Make the JS wrapper optional
 * Add support for multiple x-axis
@@ -42,6 +49,13 @@ as possible. See http://framework.zend.com/security/advisory/ZF2014-01
 * Configure Travis to test on Symfony 2.1, 2.2 and 2.3
 
 
-### 1.0.0  (2013-08-06)
+### 1.0.0 - 2013-08-06
 
 * Initial release
+
+
+[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.3...HEAD
+[1.3.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.2...1.3
+[1.2.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.1...1.2
+[1.1.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.0.1...1.1
+[1.0.1]: https://github.com/marcaube/ObHighchartsBundle/compare/1.0...1.0.1
