@@ -11,11 +11,14 @@ namespace Ob\HighchartsBundle\Highcharts;
  */
 class Highchart extends AbstractChart implements ChartInterface
 {
+    public $colorAxis;
+
     public $noData;
 
     public function __construct()
     {
         parent::__construct();
+        $this->initChartOption('colorAxis');
         $this->initChartOption('noData');
     }
 
@@ -36,6 +39,9 @@ class Highchart extends AbstractChart implements ChartInterface
 
         // Colors
         $chartJS .= $this->renderColors();
+
+        // Color Axis
+        $chartJS .= $this->renderColorAxis();
 
         // Credits
         $chartJS .= $this->renderCredits();
@@ -94,6 +100,20 @@ class Highchart extends AbstractChart implements ChartInterface
         }
 
         return trim($chartJS);
+    }
+
+    /**
+     * @return string
+     */
+    private function renderColorAxis()
+    {
+        if (gettype($this->colorAxis) === 'array') {
+            return $this->renderWithJavascriptCallback($this->colorAxis, "colorAxis");
+        } elseif (gettype($this->colorAxis) === 'object') {
+            return $this->renderWithJavascriptCallback($this->colorAxis->colorAxis, "colorAxis");
+        }
+
+        return "";
     }
 
     /**
