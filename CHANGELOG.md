@@ -6,6 +6,11 @@
 TBD
 
 
+### [1.4.0] - 2016-01-10
+
+* Update version constraint to support Symfony 3
+
+
 ### [1.3.0] - 2015-10-10
 
 * Update to PSR-4 autoloading
@@ -19,7 +24,7 @@ TBD
 * Add support for lang
 * Test on more PHP versions and also HHVM
 * Add support for drilldown
-* Add support for setOptions 
+* Add support for setOptions
 * Drop support for deprecated versions of Symfony
 * Add support for scrollbar
 
@@ -54,7 +59,8 @@ as possible. See http://framework.zend.com/security/advisory/ZF2014-01
 * Initial release
 
 
-[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.3...HEAD
+[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.4...HEAD
+[1.4.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.3...1.4
 [1.3.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.2...1.3
 [1.2.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.1...1.2
 [1.1.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.0.1...1.1
