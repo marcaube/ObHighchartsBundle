@@ -1,30 +1,43 @@
 language: php
 
+sudo: false
+
 php:
-    - 5.3
-    - 5.4
-    - 5.5
-    - 5.6
-    - hhvm
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
  
 matrix:
-    allow_failures:
-        - php: hhvm
-    include:
-        - php: 5.3
-          env: dependencies=lowest
+  fast_finish: true
+  include:
+    - php: 5.3
+      env: COMPOSER_FLAGS="--prefer-lowest"
+    - php: 5.6
+      env: SYMFONY_VERSION=2.3.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.0.*
+  allow_failures:
+    - php: hhvm
 
-env:
-    - SYMFONY_VERSION=2.3.*
-    - SYMFONY_VERSION=2.4.*
-    - SYMFONY_VERSION=2.5.*
+cache:
+  directories:
+    - $HOME/.composer/cache
 
-before_script:
-    - curl -s http://getcomposer.org/installer | php
-    - php composer.phar --dev install
-    - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
+before_install:
+  - composer selfupdate
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+
+install:
+  - composer update --no-interaction $COMPOSER_FLAGS
 
 script:
-    - phpunit --coverage-text --coverage-clover=coverage.clover
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - phpunit --coverage-text --coverage-clover=coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
