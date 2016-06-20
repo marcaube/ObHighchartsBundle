@@ -3,6 +3,6 @@ parameters:
 
 services:
   ob_highcharts.twig.highcharts_extension:
-    class: %ob_highcharts.twig_extension.class%
+    class: "%ob_highcharts.twig_extension.class%"
     tags:
         - { name: twig.extension }
