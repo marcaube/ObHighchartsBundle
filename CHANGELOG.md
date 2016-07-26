@@ -5,6 +5,12 @@
 
 TBD
 
+### [1.5.0] - 2016-07-26
+
+* Improve Travis configuration, test on PHP 7
+* Add support for zend-json ~3.0
+* Fix Symfony 3.1 deprecation notice for YAML scalars starting with `%`
+
 
 ### [1.4.0] - 2016-01-10
 
@@ -59,7 +65,8 @@ as possible. See http://framework.zend.com/security/advisory/ZF2014-01
 * Initial release
 
 
-[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.4...HEAD
+[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.5...HEAD
+[1.5.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.4...1.5
 [1.4.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.3...1.4
 [1.3.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.2...1.3
 [1.2.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.1...1.2
