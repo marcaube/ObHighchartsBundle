@@ -122,7 +122,7 @@ class Highchart extends AbstractChart implements ChartInterface
     private function renderPane()
     {
         if (get_object_vars($this->pane->pane)) {
-            return "pane: " . json_encode($this->pane->pane) . ",\n";
+            return "\"pane\": " . json_encode($this->pane->pane) . ",\n";
         }
 
         return "";
@@ -134,7 +134,7 @@ class Highchart extends AbstractChart implements ChartInterface
     private function renderDrilldown()
     {
         if (get_object_vars($this->drilldown->drilldown)) {
-            return "drilldown: " . json_encode($this->drilldown->drilldown) . ",\n";
+            return "\"drilldown\": " . json_encode($this->drilldown->drilldown) . ",\n";
         }
 
         return "";
