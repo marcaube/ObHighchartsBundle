@@ -1,4 +1,5 @@
 <?php
+
 namespace Ob\HighchartsBundle\Twig;
 
 use Ob\HighchartsBundle\Highcharts\ChartInterface;
