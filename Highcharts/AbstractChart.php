@@ -30,12 +30,13 @@ abstract class AbstractChart
     public $navigation;
     public $pane;
     public $scrollbar;
+    public $events;
 
     public function __construct()
     {
         $chartOptions = array('chart', 'credits', 'global', 'labels', 'lang', 'legend', 'loading', 'plotOptions',
             'rangeSelector', 'point', 'subtitle', 'title', 'tooltip', 'xAxis', 'yAxis', 'pane', 'exporting',
-            'navigation', 'drilldown', 'scrollbar');
+            'navigation', 'drilldown', 'scrollbar', 'events');
 
         foreach ($chartOptions as $option) {
             $this->initChartOption($option);
