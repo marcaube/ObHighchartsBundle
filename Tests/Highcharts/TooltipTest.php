@@ -3,12 +3,13 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 use Zend\Json\Expr;
 
 /**
  * This class hold Unit tests for the tooltip option
  */
-class TooltipTest extends \PHPUnit_Framework_TestCase
+class TooltipTest extends TestCase
 {
     /**
      * Animation option (true/false)

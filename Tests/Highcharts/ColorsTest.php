@@ -3,11 +3,12 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the colors option
  */
-class ColorsTest extends \PHPUnit_Framework_TestCase
+class ColorsTest extends TestCase
 {
     /**
      * Series output

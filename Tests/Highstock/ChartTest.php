@@ -3,8 +3,9 @@
 namespace Ob\HighchartsBundle\Tests\Highstock;
 
 use Ob\HighchartsBundle\Highcharts\Highstock;
+use PHPUnit\Framework\TestCase;
 
-class ChartTest extends \PHPUnit_Framework_TestCase
+class ChartTest extends TestCase
 {
     protected $chart;
 

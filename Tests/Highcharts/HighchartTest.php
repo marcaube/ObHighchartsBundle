@@ -3,11 +3,12 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the Highchart Class
  */
-class HighchartTest extends \PHPUnit_Framework_TestCase
+class HighchartTest extends TestCase
 {
     /**
      * Render chart using jQuery
