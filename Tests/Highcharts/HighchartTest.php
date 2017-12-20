@@ -16,7 +16,7 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
     {
         $chart = new Highchart();
         $this->assertRegExp(
-            '/\$\(function\s?\(\)\s?\{\n?\r?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            '/\$\(function\s?\(\)\s?\{\n?\r?\s*Highcharts\.chart\(\'chart\', \{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
             $chart->render()
         );
     }
@@ -28,7 +28,7 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
     {
         $chart = new Highchart();
         $this->assertRegExp(
-            '/var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);/',
+            '/Highcharts\.chart\(\'chart\', \{\n?\r?\s*\}\);/',
             $chart->render(null)
         );
     }
@@ -40,7 +40,7 @@ class HighchartTest extends \PHPUnit_Framework_TestCase
     {
         $chart = new Highchart();
         $this->assertRegExp(
-            '/window.addEvent\(\'domready\', function\s?\(\)\s?\{\r?\n?\s*var chart = new Highcharts.Chart\(\{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
+            '/window.addEvent\(\'domready\', function\s?\(\)\s?\{\r?\n?\s*Highcharts\.chart\(\'chart\', \{\n?\r?\s*\}\);\n?\r?\s*\}\);/',
             $chart->render('mootools')
         );
     }

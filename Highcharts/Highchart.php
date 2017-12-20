@@ -32,7 +32,7 @@ class Highchart extends AbstractChart implements ChartInterface
         $chartJS = "";
         $chartJS .= $this->renderEngine($engine);
         $chartJS .= $this->renderOptions();
-        $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.Chart({\n";
+        $chartJS .= "\n Highcharts.chart('" . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') ."', {\n";
 
         // Chart
         $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");

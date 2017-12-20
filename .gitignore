@@ -5,3 +5,15 @@ composer.phar
 php-cs-fixer.phar
 
 vendor
+
+
+# IDE (SublimeText, Eclipse, Zend Studio, Netbeans, PHPStorm, TextMate2)
+Capfile
+.buildpath
+.idea
+nbproject
+.project
+.settings
+.sublime-project
+.tm_properties
+TextMate2

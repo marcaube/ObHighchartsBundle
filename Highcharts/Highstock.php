@@ -21,7 +21,7 @@ class Highstock extends AbstractChart implements ChartInterface
         $chartJS = "";
         $chartJS .= $this->renderEngine($engine);
         $chartJS .= $this->renderOptions();
-        $chartJS .= "\n    var " . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') . " = new Highcharts.StockChart({\n";
+        $chartJS .= "\n Highcharts.stockChart('" . (isset($this->chart->renderTo) ? $this->chart->renderTo : 'chart') ."', {\n";
 
         // Chart Option
         $chartJS .= $this->renderWithJavascriptCallback($this->chart->chart, "chart");
