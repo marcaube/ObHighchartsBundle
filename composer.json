@@ -23,7 +23,7 @@
     "require-dev": {
         "symfony/phpunit-bridge": "^3.3 || ^4.0",
         "symfony/framework-bundle": "^2.8 || ^3.4 || ^4.0",
-        "nyholm/symfony-bundle-test": "dev-Nyholm-patch-1"
+        "nyholm/symfony-bundle-test": "^1.2.3"
     },
     "autoload": {
         "psr-4": { "Ob\\HighchartsBundle\\": "" }
