@@ -1,43 +1,70 @@
 language: php
-
 sudo: false
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
- 
-matrix:
-  fast_finish: true
-  include:
-    - php: 5.3
-      env: COMPOSER_FLAGS="--prefer-lowest"
-    - php: 5.6
-      env: SYMFONY_VERSION=2.3.*
-    - php: 5.6
-      env: SYMFONY_VERSION=2.7.*
-    - php: 5.6
-      env: SYMFONY_VERSION=2.8.*
-    - php: 5.6
-      env: SYMFONY_VERSION=3.0.*
-  allow_failures:
-    - php: hhvm
-
 cache:
-  directories:
-    - $HOME/.composer/cache
+    directories:
+        - $HOME/.composer/cache/files
+
+env:
+    global:
+        - TEST_COMMAND="./vendor/bin/simple-phpunit"
+
+branches:
+    except:
+        - /^analysis-.*$/
+
+matrix:
+    fast_finish: true
+    include:
+          # Test with lowest dependencies
+        - php: 7.1
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
+        - php: 5.4
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
+
+          # Test the latest stable release
+        - php: hhvm
+        - php: 5.3
+        - php: 5.4
+        - php: 5.5
+        - php: 5.6
+        - php: 7.0
+        - php: 7.1
+        - php: 7.2
+          env: COVERAGE=true TEST_COMMAND="./vendor/bin/simple-phpunit --coverage-text --coverage-clover=coverage.clover"
+
+          # Force some major versions of Symfony
+        - php: 7.2
+          env: DEPENDENCIES="dunglas/symfony-lock:^2"
+        - php: 7.2
+          env: DEPENDENCIES="dunglas/symfony-lock:^3"
+        - php: 7.2
+          env: DEPENDENCIES="dunglas/symfony-lock:^4"
+
+          # Latest commit to master
+        - php: 7.2
+          env: STABILITY="dev"
+
+    allow_failures:
+          # Dev-master is allowed to fail.
+        - env: STABILITY="dev"
+        - php: hhvm
 
 before_install:
-  - composer selfupdate
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+    - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+    - if ! [ -z "$STABILITY" ]; then composer config minimum-stability ${STABILITY}; fi;
+    - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
 
 install:
-  - composer update --no-interaction $COMPOSER_FLAGS
+    # To be removed when this issue will be resolved: https://github.com/composer/composer/issues/5355
+    - if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --prefer-dist --no-interaction --prefer-stable --quiet; fi
+    - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
+    - vendor/bin/simple-phpunit install
 
 script:
-  - phpunit --coverage-text --coverage-clover=coverage.clover
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    - composer validate --strict --no-check-lock
+    - $TEST_COMMAND
+
+after_success:
+    - if [[ "$COVERAGE" = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+    - if [[ "$COVERAGE" = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
