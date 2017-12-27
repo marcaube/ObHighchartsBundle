@@ -19,7 +19,7 @@ matrix:
           # Test with lowest dependencies
         - php: 7.1
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
-        - php: 5.4
+        - php: 5.5
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
