@@ -28,8 +28,8 @@ class BundleInitializationTest extends BaseBundleTestCase
         $container = $this->getContainer();
 
         // Test if you services exists
-        $this->assertTrue($container->has('ob_highcharts.twig.highcharts_extension'));
-        $service = $container->get('ob_highcharts.twig.highcharts_extension');
+        $this->assertTrue($container->has('test.ob_highcharts.twig.highcharts_extension'));
+        $service = $container->get('test.ob_highcharts.twig.highcharts_extension');
         $this->assertInstanceOf(HighchartsExtension::class, $service);
     }
 
