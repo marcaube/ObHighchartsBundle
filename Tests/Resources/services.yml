@@ -1,0 +1,4 @@
+services:
+  test.ob_highcharts.twig.highcharts_extension:
+    public: true
+    alias: ob_highcharts.twig.highcharts_extension

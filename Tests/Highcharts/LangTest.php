@@ -3,11 +3,12 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the lang option
  */
-class LangTest extends \PHPUnit_Framework_TestCase
+class LangTest extends TestCase
 {
     /**
      * Set localized month names

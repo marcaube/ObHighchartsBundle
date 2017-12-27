@@ -4,11 +4,12 @@ namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Zend\Json\Expr;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the exporting option
  */
-class ExportingTest extends \PHPUnit_Framework_TestCase
+class ExportingTest extends TestCase
 {
     /**
      * buttons option

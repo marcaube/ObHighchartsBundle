@@ -3,11 +3,12 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the series option
  */
-class ScrollbarTest extends \PHPUnit_Framework_TestCase
+class ScrollbarTest extends TestCase
 {
     /**
      * @var array
