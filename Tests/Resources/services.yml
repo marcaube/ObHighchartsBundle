@@ -1,0 +1,3 @@
+services:
+  ob_highcharts.twig.highcharts_extension:
+    public: true
