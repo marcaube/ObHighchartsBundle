@@ -15,12 +15,6 @@ class BundleInitializationTest extends BaseBundleTestCase
 
     public function testInitBundle()
     {
-        // Create a new Kernel
-        $kernel = $this->createKernel();
-
-        // Add some configuration
-        $kernel->addConfigFile(__DIR__.'/Resources/services.yml');
-
         // Boot the kernel.
         $this->bootKernel();
 

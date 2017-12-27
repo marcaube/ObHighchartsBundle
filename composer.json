@@ -12,7 +12,7 @@
     ],
 
     "require": {
-        "php": "^5.3 || ^7.0",
+        "php": "^5.5 || ^7.0",
         "symfony/http-kernel": "^2.3 || ^3.0 || ^4.0",
         "symfony/dependency-injection": "^2.3 || ^3.0 || ^4.0",
         "symfony/config": "^2.3 || ^3.0 || ^4.0",
@@ -23,7 +23,7 @@
     "require-dev": {
         "symfony/phpunit-bridge": "^3.3 || ^4.0",
         "symfony/framework-bundle": "^2.3 || ^3.0 || ^4.0",
-        "nyholm/symfony-bundle-test": "^1.2.2"
+        "nyholm/symfony-bundle-test": "dev-Nyholm-patch-1"
     },
     "autoload": {
         "psr-4": { "Ob\\HighchartsBundle\\": "" }
