@@ -3,8 +3,9 @@
 namespace Ob\HighchartsBundle\Tests\Highstock;
 
 use Ob\HighchartsBundle\Highcharts\Highstock;
+use PHPUnit\Framework\TestCase;
 
-class ColorsTest extends \PHPUnit_Framework_TestCase
+class ColorsTest extends TestCase
 {
     public function testColors()
     {

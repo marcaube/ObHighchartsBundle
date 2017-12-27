@@ -13,16 +13,16 @@
 
     "require": {
         "php": "^5.5 || ^7.0",
-        "symfony/http-kernel": "^2.3 || ^3.0 || ^4.0",
-        "symfony/dependency-injection": "^2.3 || ^3.0 || ^4.0",
-        "symfony/config": "^2.3 || ^3.0 || ^4.0",
-        "symfony/yaml": "^2.3 || ^3.0 || ^4.0",
-        "zendframework/zend-json": "~2.3|~3.0",
-        "twig/twig": "^1.0 || ^2.0"
+        "symfony/http-kernel": "^2.8 || ^3.4 || ^4.0",
+        "symfony/dependency-injection": "^2.8 || ^3.4 || ^4.0",
+        "symfony/config": "^2.8 || ^3.4 || ^4.0",
+        "symfony/yaml": "^2.8 || ^3.4 || ^4.0",
+        "zendframework/zend-json": "^2.3 || ^3.0",
+        "twig/twig": "^1.35 || ^2.4"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^3.3 || ^4.0",
-        "symfony/framework-bundle": "^2.3 || ^3.0 || ^4.0",
+        "symfony/framework-bundle": "^2.8 || ^3.4 || ^4.0",
         "nyholm/symfony-bundle-test": "dev-Nyholm-patch-1"
     },
     "autoload": {

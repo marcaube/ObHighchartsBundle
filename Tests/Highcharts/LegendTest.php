@@ -3,11 +3,12 @@
 namespace Ob\HighchartsBundle\Tests\Highcharts;
 
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class hold Unit tests for the legend option
  */
-class LegendTest extends \PHPUnit_Framework_TestCase
+class LegendTest extends TestCase
 {
     /**
      * Align option (left/center/right)
