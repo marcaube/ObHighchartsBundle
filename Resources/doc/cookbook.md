@@ -162,3 +162,45 @@ $formatter = new Expr('function () {
 $ob->tooltip->formatter($formatter);
 $ob->series($series);
 ```
+
+## Map
+
+This is a simple recipe to create an FR map-chart demo at [highcharts.com/maps/demo/color-axis](http://www.highcharts.com/maps/demo/color-axis)
+
+In the controller file
+
+```php
+$map = new Highmap();
+$map->chart->renderTo('map');
+$map->chart->borderWidth(1);
+$map->title->text('FRANCE Population');
+$map->mapNavigation->enabled(true);
+$map->series(array(
+    array(
+        'data' => array(
+            array('value' => rand(1, 100), 'code' => 'Île-de-France'),
+            array('value' => rand(1, 100), 'code' => 'Bourgogne'),
+            array('value' => rand(1, 100), 'code' => 'Alsace'),
+            // ...
+        ),
+        'name' => 'FR',
+        'mapData' => new \Zend\Json\Expr("Highcharts.maps['countries/fr/fr-all']"),
+        'joinBy' => array('name', 'code'),
+        'tooltip' => array('pointFormat' => '{point.code}: {point.value}'),
+    )
+));
+```
+
+In the twig file
+
+```javascript
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/fr/fr-all.js"></script>
+<script type="text/javascript">
+    {{ chart(map) }}
+</script>
+```
+
+```twig
+<div id="map" style="height: 500px; min-width: 310px; max-width: 600px; margin: 0 auto"></div>
+```

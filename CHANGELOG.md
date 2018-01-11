@@ -3,7 +3,7 @@
 
 ## [Unreleased]
 
-TBD
+* Added maps support (http://www.highcharts.com/maps/demo)
 
 
 ### [1.6.0] - 2017-12-27
