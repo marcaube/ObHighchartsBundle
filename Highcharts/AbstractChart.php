@@ -2,7 +2,7 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 abstract class AbstractChart
 {
