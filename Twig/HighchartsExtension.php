@@ -3,12 +3,12 @@ namespace Ob\HighchartsBundle\Twig;
 
 use Ob\HighchartsBundle\Highcharts\ChartInterface;
 
-class HighchartsExtension extends \AbstractExtension
+class HighchartsExtension extends \Twig\Extension\AbstractExtension
 {
     public function getFunctions()
     {
         return array(
-            new \TwigFunction('chart', array($this, 'chart'), array('is_safe' => array('html'))),
+            new \Twig\TwigFunction('chart', array($this, 'chart'), array('is_safe' => array('html'))),
         );
     }
 
