@@ -1,6 +1,6 @@
 # ObHighchartsBundle
 
-`ObHighchartsBundle` eases the use of highcharts to display rich graphs and charts in your Symfony2 application by
+`ObHighchartsBundle` eases the use of highcharts to display rich graphs and charts in your Symfony application by
 providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library
 [Highcharts](http://www.highcharts.com).
 

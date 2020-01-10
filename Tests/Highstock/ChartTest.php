@@ -9,7 +9,7 @@ class ChartTest extends TestCase
 {
     protected $chart;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->chart = new Highstock();
     }

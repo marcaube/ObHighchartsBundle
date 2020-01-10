@@ -3,7 +3,8 @@
 
 ## [Unreleased]
 
-TBD
+* Added support for Symfony 5
+* Added support for Twig 3
 
 
 ### [1.6.0] - 2017-12-27

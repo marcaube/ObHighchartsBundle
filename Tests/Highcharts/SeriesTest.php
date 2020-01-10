@@ -18,7 +18,7 @@ class SeriesTest extends TestCase
     /**
      * Initialises the data
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->series = array(
             array("name" => "Data Serie #1", "data" => array(1,2,4,5,6,3,8)),
