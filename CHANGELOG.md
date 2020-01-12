@@ -3,8 +3,14 @@
 
 ## [Unreleased]
 
-* Added support for Symfony 5
-* Added support for Twig 3
+TBD
+
+
+### [1.7.0] - 2020-01-12
+
+* Add support for Symfony 5
+* Add support for Twig 3
+* Drop support for PHP < 7.2
 
 
 ### [1.6.0] - 2017-12-27
@@ -72,7 +78,8 @@ as possible. See http://framework.zend.com/security/advisory/ZF2014-01
 * Initial release
 
 
-[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.6...HEAD
+[Unreleased]: https://github.com/marcaube/ObHighchartsBundle/compare/1.7...HEAD
+[1.7.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.6...1.7
 [1.6.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.5...1.6
 [1.5.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.4...1.5
 [1.4.0]: https://github.com/marcaube/ObHighchartsBundle/compare/1.3...1.4
