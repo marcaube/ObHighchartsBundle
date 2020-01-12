@@ -23,7 +23,7 @@ class ScrollbarTest extends TestCase
     /**
      * Initialises the data
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->scrollbar = array(
             'enabled' => true,

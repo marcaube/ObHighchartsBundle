@@ -10,7 +10,7 @@ class RangeSelectorTest extends TestCase
     protected $chart;
     protected $range;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->chart = new Highstock();
         $this->range = $this->chart->rangeSelector;

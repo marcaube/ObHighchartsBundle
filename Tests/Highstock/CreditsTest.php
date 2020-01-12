@@ -10,7 +10,7 @@ class CreditsTest extends TestCase
     protected $chart;
     protected $credits;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->chart = new Highstock();
         $this->credits = $this->chart->credits;
