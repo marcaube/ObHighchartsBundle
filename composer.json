@@ -1,28 +1,30 @@
 {
-    "name": "ob/highcharts-bundle",
+    "name": "mpescador1/highcharts-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Bundle that ease the use of highcharts to display rich graph and charts in your app",
     "keywords": ["symfony", "charting", "charts", "highcharts", "chart", "graph", "graphs", "ob", "marcaube"],
-    "homepage": "https://github.com/marcaube/ObHighchartsBundle",
+    "homepage": "https://github.com/mpescador1/ObHighchartsBundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Marc Aubé"
+        },{ 
+            "name": "Miguel Angel Pescador Santirso"
         }
     ],
 
     "require": {
-        "php": "^7.2",
-        "symfony/http-kernel": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/yaml": "^4.4 || ^5.0",
+        "php": "^7.2||^8.0",
+        "symfony/http-kernel": "^4.4 || ^5.0|| ^5.3",
+        "symfony/dependency-injection": "^4.4 || ^5.0 || ^5.3",
+        "symfony/config": "^4.4 || ^5.0 || ^5.3",
+        "symfony/yaml": "^4.4 || ^5.0 || ^5.3",
         "twig/twig": "^2.10 || ^3.0",
         "laminas/laminas-json": "^3.1"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.4 || ^5.0",
-        "symfony/framework-bundle": "^4.4 || ^5.0",
+        "symfony/phpunit-bridge": "^4.4 || ^5.0 || ^5.3",
+        "symfony/framework-bundle": "^4.4 || ^5.0 || ^5.3",
         "nyholm/symfony-bundle-test": "^1.6.1"
     },
     "autoload": {

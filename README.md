@@ -1,5 +1,7 @@
 # ObHighchartsBundle
 
+* Updated to work with Symfony 5.3
+
 `ObHighchartsBundle` eases the use of highcharts to display rich graphs and charts in your Symfony application by
 providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library
 [Highcharts](http://www.highcharts.com).
@@ -10,7 +12,7 @@ DRY out your chart code by writing it all in PHP!
 [![Total Downloads](https://poser.pugx.org/ob/highcharts-bundle/downloads.png)](https://packagist.org/packages/ob/highcharts-bundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/quality-score.png?s=a22d41fd17b944f8275e92c6d5aba27aca2ff18d)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
 [![Code Coverage](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/badges/coverage.png?s=3d779351f7ef378fe0f6679809c90c17ad6f11b4)](https://scrutinizer-ci.com/g/marcaube/ObHighchartsBundle/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/4cf81d53-f79c-478e-a172-ac2f60b55f02/mini.png)](https://insight.sensiolabs.com/projects/4cf81d53-f79c-478e-a172-ac2f60b55f02)
+
 
 
 ## Documentation
@@ -19,7 +21,7 @@ DRY out your chart code by writing it all in PHP!
 * [Usage](Resources/doc/usage.md)
 * [Cookbook](Resources/doc/cookbook.md)
 * [Highcharts API](http://api.highcharts.com/highcharts)
-
+* [SonataAdmin integration](Resources/doc/sonataadmin.md)
 
 ## Contributing
 
