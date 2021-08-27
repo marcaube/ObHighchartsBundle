@@ -4,6 +4,10 @@ Requirements
 - SonataAdminBundle (4.x)
 - ObHighChartsBundle (https://github.com/mpescador1/ObHighchartsBundle)
 
+## Render Template
+
+The template uses in this example reder a block of sonata Admin with the defined chart. 
+
 templates/Form/chart_block_single.html.twig
 ```twig
 {% extends sonata_block.templates.block_base %}
@@ -21,6 +25,12 @@ templates/Form/chart_block_single.html.twig
     </div>
 {% endblock %}
 ```
+
+## Sonata Admin Yaml Config
+
+We add the block in sonata_admin.blocks and register de block in sonata_blocks.blocks.
+The registered services are below in the services.yaml file.
+
 config/packages/sonata_admin.yaml
 ```yaml
 sonata_admin:
@@ -34,6 +44,11 @@ sonata_block:
     admin.block.service.registrations_chart: #This is the chart block - RegistrationsChartBlockService (below)
             contexts: [ admin ]
 ```
+## Block definition
+
+We define the block service to show in the dashboard. We can add any injected class to build the block.
+
+In this case we inject de ChartService (below) to get the Hightchart object.
 
 src/Block/Service/RegistrationsChartService.php
 ```php
@@ -53,7 +68,7 @@ use Twig\Environment;
 
 class RegistrationsChartService extends AbstractBlockService
 {
-//Services are injected in the abstract class
+    //Services are injected in the abstract class
     //Register class as a service in the container e.g. admin.block.service.registrations_chart
     //$chartbuilder is a service that has our default chart configuration, which in turn uses the ObHighCharts bundle to render the charts.
     /**
@@ -108,6 +123,12 @@ class RegistrationsChartService extends AbstractBlockService
     }
 }
 ```
+## Service definition
+
+This file do the magic, call the HightChart class to build our chart.
+I inject the entity manager because, in many cases, the chart will be populated with database data. 
+
+In this example was not use at all.
 
 src/Service/ChartService.php
 ```php
@@ -150,6 +171,9 @@ class ChartService
     }
 }
 ```
+## Services configuration
+
+We need configure the services injecting the diferent services as shown below.
 
 config/services.yaml
 ```yaml
