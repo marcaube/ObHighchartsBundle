@@ -5,7 +5,7 @@ Requirements
 - ObHighChartsBundle (https://github.com/mpescador1/ObHighchartsBundle)
 
 templates/Form/chart_block_single.html.twig
-´´´twig
+```twig
 {% extends sonata_block.templates.block_base %}
 {% block block %}
     <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
@@ -20,9 +20,9 @@ templates/Form/chart_block_single.html.twig
         </div>
     </div>
 {% endblock %}
-´´´
+```
 config/packages/sonata_admin.yaml
-´´´yaml
+```yaml
 sonata_admin:
   dashboard:
     ....
@@ -33,10 +33,10 @@ sonata_block:
   blocks:
     admin.block.service.registrations_chart: #This is the chart block - RegistrationsChartBlockService (below)
             contexts: [ admin ]
-´´´
+```
 
 src/Block/Service/RegistrationsChartService.php
-´´´php
+```php
 <?php
 
 namespace App\Block\Service;
@@ -107,10 +107,10 @@ class RegistrationsChartService extends AbstractBlockService
         ));
     }
 }
-´´´
+```
 
 src/Service/ChartService.php
-´´´php
+```php
 <?php
 
 namespace App\Service;
@@ -149,10 +149,10 @@ class ChartService
         return $ob;
     }
 }
-´´´
+```
 
 config/services.yaml
-´´´yaml
+```yaml
 services:
   ....
     admin.block.service.chart:
@@ -169,4 +169,4 @@ services:
             - { name: sonata.block }
         public: true
   ....
-´´´
+```
