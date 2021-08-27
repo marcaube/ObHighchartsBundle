@@ -1,6 +1,6 @@
 # ObHighchartsBundle
 
-*Updated to work with Symfony 5.3
+* Updated to work with Symfony 5.3
 
 `ObHighchartsBundle` eases the use of highcharts to display rich graphs and charts in your Symfony application by
 providing Twig extensions and PHP objects to do the heavy lifting. The bundle uses the excellent JS library
@@ -21,7 +21,7 @@ DRY out your chart code by writing it all in PHP!
 * [Usage](Resources/doc/usage.md)
 * [Cookbook](Resources/doc/cookbook.md)
 * [Highcharts API](http://api.highcharts.com/highcharts)
-
+* [SonataAdmin integration](Resources/doc/sonataadmin.md)
 
 ## Contributing
 
