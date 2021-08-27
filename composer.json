@@ -8,7 +8,9 @@
     "authors": [
         {
             "name": "Marc Aubé"
-        },{ "name": "Miguel Angel Pescador Santirso"
+        },{ 
+            "name": "Miguel Angel Pescador Santirso"
+        }
     ],
 
     "require": {
