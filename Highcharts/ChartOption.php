@@ -2,6 +2,8 @@
 
 namespace Ob\HighchartsBundle\Highcharts;
 
+use stdClass;
+
 /**
  * This class is part of the Ob/HighchartsBundle
  * See Highcharts documentation at http://www.highcharts.com/ref/#chart
@@ -16,7 +18,7 @@ class ChartOption
     public function __construct($name)
     {
         $this->option_name = $name;
-        $this->{$name} = new \stdClass();
+        $this->{$name} = new stdClass();
     }
 
     /**
@@ -41,15 +43,14 @@ class ChartOption
     public function __get($name)
     {
         $option_name = $this->option_name;
-        $value = $this->{$option_name}->{$name};
 
-        return $value;
+        return $this->{$option_name}->{$name};
     }
 
     /**
      * @param string $name
      *
-     * @return mixed
+     * @return bool
      */
     public function __isset($name)
     {

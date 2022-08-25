@@ -148,6 +148,8 @@ abstract class AbstractChart
         } elseif ($engine == 'jquery') {
             return "$(function () {";
         }
+
+        return '';
     }
 
     /**
